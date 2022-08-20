@@ -32,17 +32,20 @@ export const AuthContextProvider = ({
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,
+          emailVerified: user.emailVerified
         })
+
       } else {
         setUser(null)
       }
       setLoading(false)
     })
-
     return () => unsubscribe()
   }, [])
 
-  const signup = (email: string, password: string) => {
+  
+
+  function signup(email: string, password: string): Promise<UserCredential> {
     return createUserWithEmailAndPassword(auth, email, password)
   }
 

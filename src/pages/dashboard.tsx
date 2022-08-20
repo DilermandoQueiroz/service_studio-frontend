@@ -1,7 +1,8 @@
 import React from 'react'
+import { withProtected } from '../hook/route'
 
 const Dashboard = () => {
   return <div>This route is protected</div>
 }
 
-export default Dashboard
+export default withProtected(Dashboard)
