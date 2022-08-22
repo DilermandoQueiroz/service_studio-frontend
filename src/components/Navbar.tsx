@@ -17,10 +17,10 @@ const Navbar = ({ auth, pathname }) => {
 
   return (
     <>
-      <nav className='flex items-center flex-wrap bg-sky-400 p-3 '>
+      <nav className='flex items-center flex-wrap bg-white p-3 '>
         <Link href='/'>
           <a className='inline-flex items-center p-2 mr-4 '>
-            <span className='text-xl text-white font-bold uppercase tracking-wide'>
+            <span className='text-xl text-black font-bold uppercase tracking-wide'>
               EASE SERVICE
             </span>
           </a>
@@ -29,17 +29,17 @@ const Navbar = ({ auth, pathname }) => {
               <Link href="/">
                 <button onClick={() => {
                   logout()
-                }} className='inline-flex p-3 hover:bg-sky-600 rounded lg:hidden text-white ml-auto hover:text-white outline-none'>Logout</button>
+                }} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Logout</button>
               </Link>
             ) : (
               <Link href="/login">
-                <button className='inline-flex p-3 hover:bg-sky-600 rounded lg:hidden text-white ml-auto hover:text-white outline-none'>Sign in</button>
+                <button className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sign in</button>
               </Link>
             )
           }
         
         <button
-          className='inline-flex p-3 hover:bg-sky-600 rounded lg:hidden text-white ml-auto hover:text-white outline-none ml-0'
+          className='inline-flex p-3 bg-black  rounded lg:hidden text-white ml-auto outline-none ml-0'
           onClick={handleClick}>
           <svg
             className='w-6 h-6'
@@ -63,30 +63,24 @@ const Navbar = ({ auth, pathname }) => {
           }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
         >
           <div className='lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
-            {!user ? (
+            {!user &&
                 <Link href='/signup' >
-                  <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-sky-600 hover:text-white '>
+                  <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
                     Sign up
                   </a>
                 </Link>
-              ) : (
-                <Link href='/servicesProviders'>
-                <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-sky-600 hover:text-white'>
-                  Services Providers
-                </a>
-              </Link>
-              )
             }
-            <Link href='/'>
-              <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-sky-600 hover:text-white'>
-                About us
-              </a>
+            <Link href='/servicesProviders'>
+                <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  Services Providers 
+                </a>
             </Link>
+            {user && 
             <Link href='/'>
-              <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-sky-600 hover:text-white'>
-                Contact us
+              <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                Your Profile
               </a>
-            </Link>
+            </Link>}
           </div>
         </div>
       </nav>

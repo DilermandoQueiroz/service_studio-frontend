@@ -14,7 +14,7 @@ export interface ServiceProviders extends SharedInfos {
 
 export interface Clients extends SharedInfos {
   cpf: string
-  birth_date: string
+  birth_date: Date
   country: string
   state: string
   city: string
@@ -44,3 +44,6 @@ export interface Sell {
 }
 
 
+export interface IPostClient extends Clients {
+
+}

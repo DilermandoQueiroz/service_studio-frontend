@@ -13,7 +13,7 @@ export default function AuthStateChanged({ children }) {
 			if(user) {
 				user.getIdToken()
 				.then((token) => {
-				setCookie(children, '__session', token, {domain: 'localhost', path: '/', sameSite: "Strict"})
+					setCookie(children, '__session', token, {domain: 'localhost', path: '/', sameSite: "Strict"})
 				}) 
 				setUser(user);
 			} else {
