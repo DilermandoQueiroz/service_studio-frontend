@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { userAgent } from "next/server";
 import React from "react";
 import useAuth from "./auth";
 
@@ -9,16 +8,10 @@ export function withPublic(Component) {
 		const router = useRouter();
 		const pathname = router.pathname;
 
-		if (auth.user && auth.user.emailVerified) {
-			router.replace("/");
-			return (
-        <>
-        <div className="md:animate-spin">
-          <p>loading</p>
-        </div>
-      </>
-      )
-		}
+		// if (auth.user && auth.user.emailVerified) {
+		// 	router.replace("/");
+		// 	return <h1>Loading...</h1>;
+		// }
 		return <Component auth={auth} pathname={pathname} {...props} />;
 	};
 }
@@ -29,12 +22,12 @@ export function withProtected(Component) {
 		const router = useRouter();
 		const pathname = router.pathname;
 
-		if (!auth.user ) {
+		if (!auth.user || !auth.user.emailVerified) {
 			router.replace("/login");
 			return (
         <>
           <div className="md:animate-spin">
-            <p>loading</p>
+            <p>loading opa</p>
           </div>
         </>
       )

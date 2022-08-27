@@ -2,12 +2,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 import { withPublic } from "../hook/route";
+import useAuth from '../hook/auth';
 
 
 
-const Navbar = ({ auth, pathname }) => {
+const Navbar = () => {
   const [active, setActive] = useState(false);
-  const { logout, user } = auth;
+  const { user, logout  } = useAuth();
+	console.log(user);
   const router = useRouter()
 
   const handleClick = () => {
@@ -88,4 +90,4 @@ const Navbar = ({ auth, pathname }) => {
   );
 };
 
-export default withPublic(Navbar)
+export default Navbar

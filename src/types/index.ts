@@ -8,13 +8,13 @@ interface SharedInfos {
 
 export interface ServiceProviders extends SharedInfos {
   cpf: string
-  signal: number
   description: string
+  birth_date: string
 }
 
 export interface Clients extends SharedInfos {
   cpf: string
-  birth_date: Date
+  birth_date: string
   country: string
   state: string
   city: string
@@ -24,6 +24,7 @@ export interface Clients extends SharedInfos {
   zip_code: string
   complement: string
 }
+
 
 
 export interface Studio extends SharedInfos {
@@ -40,10 +41,40 @@ export interface Studio extends SharedInfos {
 } 
 
 export interface Sell {
+  studio_name: string
+  client_name: string
+  service_provider_name: string
+  service_style_name: string
+  tender_id: number
+  price: number
+  studio_rate: number
+  client_rate: number
+  service_provider_rate: number
 
 }
 
 
 export interface IPostClient extends Clients {
 
+}
+
+export interface IPostSignupProvider {
+  display_name: string
+  email: string
+  cpf: string
+  phone_number: string
+  birth_date: string
+  password: string
+}
+
+export interface IPostRegisterSell {
+  studio_name: string
+  client_name: string
+  service_provider_name: string
+  service_style_name: string
+  tender_id: number
+  price: number
+  studio_rate: number
+  client_rate: number
+  service_provider_rate: number
 }

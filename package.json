@@ -18,7 +18,9 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.34.1",
-    "sass": "^1.54.4"
+    "react-notifications-component": "^4.0.1",
+    "sass": "^1.54.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^18.7.8",

@@ -16,8 +16,6 @@ export default function AuthStateChanged({ children }) {
 					setCookie(children, '__session', token, {domain: 'localhost', path: '/', sameSite: "Strict"})
 				}) 
 				setUser(user);
-			} else {
-				setUser(null)
 			}
 			setLoading(false);
 		});

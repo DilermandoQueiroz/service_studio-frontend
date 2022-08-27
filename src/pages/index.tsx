@@ -1,7 +1,9 @@
 import Head from 'next/head';
-import { withPublic } from '../hook/route';
+import useAuth from '../hook/auth';
 
 const Home = () => {
+  const { user } = useAuth();
+	console.log(user);
   return (
     
     <div>
@@ -13,4 +15,4 @@ const Home = () => {
   );
 }
 
-export default withPublic(Home)
+export default Home
