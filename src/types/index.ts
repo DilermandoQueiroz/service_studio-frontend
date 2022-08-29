@@ -50,31 +50,25 @@ export interface Sell {
   studio_rate: number
   client_rate: number
   service_provider_rate: number
-
+  start_time: string
 }
 
+export interface IPostRegisterSell {
+  client_name: string
+  service_provider_name: string
+  price: number
+  start_time: string
+}
 
 export interface IPostClient extends Clients {
 
 }
 
-export interface IPostSignupProvider {
-  display_name: string
-  email: string
-  cpf: string
-  phone_number: string
-  birth_date: string
+export interface IPostProvider extends ServiceProviders {
   password: string
 }
 
-export interface IPostRegisterSell {
-  studio_name: string
-  client_name: string
-  service_provider_name: string
-  service_style_name: string
-  tender_id: number
-  price: number
-  studio_rate: number
-  client_rate: number
-  service_provider_rate: number
+export interface IPostSell extends Sell {
+
 }
+

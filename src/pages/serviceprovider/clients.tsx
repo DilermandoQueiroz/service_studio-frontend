@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { ServiceProviderCard } from '../components/Card'
-import { withPublic } from '../hook/route'
+import { ServiceProviderCard } from '../../components/Card'
+import { withProtected } from '../../hook/route'
 import nookies from 'nookies'
 
 
@@ -8,7 +8,7 @@ import nookies from 'nookies'
 export async function getServerSideProps(context) {
   try {
     const token = nookies.get(context, "__session")
-    const response = await fetch('http://localhost:8000/providers',
+    const response = await fetch('http://localhost:8000/sell_by_email',
       {
         headers: {
           'Authorization': `Bearer ${token["__session"]}`
@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
 
 }
 
-const serviceProviders = ({ auth, pathname, users }) => {
+const ClientsProvider = ({ auth, pathname, users }) => {
 
   return (
     <>
@@ -54,4 +54,4 @@ const serviceProviders = ({ auth, pathname, users }) => {
 }
 
 
-export default withPublic(serviceProviders)
+export default withProtected(ClientsProvider)

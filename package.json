@@ -10,6 +10,7 @@
     "build:css": "postcss styles/tailwind.css -o styles/main.css"
   },
   "dependencies": {
+    "date-fns": "^2.29.2",
     "firebase": "^9.9.2",
     "next": "12.2.5",
     "nookies": "^2.5.2",

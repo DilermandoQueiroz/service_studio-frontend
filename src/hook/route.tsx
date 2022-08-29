@@ -22,7 +22,7 @@ export function withProtected(Component) {
 		const router = useRouter();
 		const pathname = router.pathname;
 
-		if (!auth.user || !auth.user.emailVerified) {
+		if (!auth.user) {
 			router.replace("/login");
 			return (
         <>
@@ -32,6 +32,17 @@ export function withProtected(Component) {
         </>
       )
 		}
+
+		// if (!auth.user.emailVerified) {
+		// 	console.log("cat no email não verificado")
+		// 	return (
+		// 		<>
+		// 			<div className="md:animate-spin">
+		// 				<p>vá validar seu e-mail imundiça</p>
+		// 			</div>
+		// 		</>
+		// 	)
+		// }
 
 		return <Component auth={auth} pathname={pathname} {...props} />;
 	};
