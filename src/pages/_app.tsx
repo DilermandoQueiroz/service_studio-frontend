@@ -6,20 +6,22 @@ import { AppProps } from 'next/app';
 import { AuthProvider } from "../hook/auth";
 import AuthStateChanged from "../layout/AuthStateChanged";
 import { ReactNotifications } from 'react-notifications-component'
+
 import 'react-notifications-component/dist/theme.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  return (
+	return (
 		<AuthProvider>
-			<ReactNotifications/>
-      <Navbar/>
+			
+			<ReactNotifications />
+			<Navbar />
 			<AuthStateChanged>
 				<Component {...pageProps} />
 			</AuthStateChanged>
 		</AuthProvider>
 	);
-   
+
 }
 
 export default MyApp

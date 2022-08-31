@@ -9,10 +9,14 @@ export const ServiceProvider = {
         
         data.name = uuidv4()
         data.birth_date = new Date(data.birth_date).toISOString().split('T')[0]
+        data.email = data.email.toLocaleLowerCase()
         try {
-            const response = await fetch('http://localhost:8000/provider/create', {
+            const response = await fetch('http://192.168.15.12:8000/provider/create', {
                 method: 'POST',
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*" 
+                },
                 body: JSON.stringify(data)
             })
             const jsonResponse = await response.json()
@@ -20,7 +24,7 @@ export const ServiceProvider = {
                 
                 Store.addNotification(
                     {
-                        title: response.status == 201 ? 'Usuário'  : 'Error' ,
+                        title: response.status == 201 ? 'Usuário Cadastrado'  : 'Error' ,
                         message: response.status == 422 ? "Verifique os parametros enviados" : jsonResponse.detail,
                         type: response.ok ? "success" : "danger",
                         insert: "top",

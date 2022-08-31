@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { ServiceProviderCard } from '../../components/Card'
+import { ClientCard } from '../../components/ClientCard'
 import { withProtected } from '../../hook/route'
 import nookies from 'nookies'
 
@@ -8,7 +8,7 @@ import nookies from 'nookies'
 export async function getServerSideProps(context) {
   try {
     const token = nookies.get(context, "__session")
-    const response = await fetch('http://localhost:8000/sell_by_email',
+    const response = await fetch('http://192.168.15.12:8000/sell_by_email',
       {
         headers: {
           'Authorization': `Bearer ${token["__session"]}`
@@ -16,24 +16,19 @@ export async function getServerSideProps(context) {
       }
     )
     const users = await response.json()
-    console.log(users)
     return {
       props: {
         users
-      }, // will be passed to the page component as props
-    }
-  } catch (error) {
-    return {
-      props: {
-
       }
     }
+  } catch (error) {
+    console.log(error)
   }
 
 }
 
 const ClientsProvider = ({ auth, pathname, users }) => {
-
+  
   return (
     <>
       <div className='mt-10 px-4 flex justify-center items-center'>
@@ -42,7 +37,7 @@ const ClientsProvider = ({ auth, pathname, users }) => {
             users?.map((user) => (
               <li key={user.name}>
                 <div>
-                  <ServiceProviderCard user={user}></ServiceProviderCard>
+                  <ClientCard user={user}></ClientCard>
                 </div>
               </li>
             ))

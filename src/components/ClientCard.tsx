@@ -3,7 +3,7 @@ export function ClientCard ({user}) {
       <div className="bg-black rounded-lg border border-gray-200 shadow-lg">
           <div className="flex flex-col items-center pb-10 pt-10">
               <img className="mb-3 w-24 h-24 rounded-full shadow-lg" src="https://criadoresid.com/wp-content/uploads/2020/08/diegodefante-300x285.jpg" alt="Bonnie image"/>
-              <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{user.display_name}</h5>
+              <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{user.client_name}</h5>
               <span className="text-sm text-gray-500 dark:text-gray-400">{user.phone_number}</span>
               <span className="text-sm text-gray-500 dark:text-gray-400">{user.email}</span>
               {/* <div className="flex mt-4 space-x-3 md:mt-6">

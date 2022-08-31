@@ -10,12 +10,14 @@ export const Client = {
 
         data.name = uuidv4()
         data.birth_date = new Date(data.birth_date).toISOString().split('T')[0]
+        data.email = data.email.toLocaleLowerCase()
         try {
-            const response = await fetch('http://localhost:8000/client/create', {
+            const response = await fetch('http://192.168.15.12:8000/client/create', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`
+                    'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
+                    "Access-Control-Allow-Origin": "*"
                 },
                 body: JSON.stringify(data)
             })

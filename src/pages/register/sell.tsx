@@ -35,19 +35,22 @@ const RegisterSell = ({auth, pathname}) => {
 
     <div className='mt-10 px-4 flex justify-center items-center'>
       <form className='container lg:mx-auto max-w-sm' onSubmit={handleSubmit(myOnSubmit)}>
+        <div className='mb-4 flex'>
+          <h1 className='text-2xl font-bold dark:text-black'>Venda</h1>
+        </div>
         <div className="relative mb-6">
           <label>Email do cliente</label>
           <input {...register("client_name", { required: true })} className='bg-white border-2 border-black border-b-4 text-black-900 text-sm rounded-lg focus:ring-black focus:border-white focus:border-2 block w-full p-2.5' type="text" />
         </div>
         <div className="relative mb-6">
           <label>Preço</label>
-          <input {...register("price", { required: true })} className='bg-white border-2 border-black border-b-4 text-black-900 text-sm rounded-lg focus:ring-black focus:border-white focus:border-2 block w-full p-2.5' type="number" />
+          <input {...register("price", { required: true })} pattern="/d*" className='bg-white border-2 border-black border-b-4 text-black-900 text-sm rounded-lg focus:ring-black focus:border-white focus:border-2 block w-full p-2.5' type="number" />
         </div>
         <div className='relative mb-6'>
         {
           !loading ? (
             <button type="submit" className='bg-black text-white text-sm rounded-lg focus:ring-black block w-full p-2.5'>
-              ENVIAR
+              REGISTRAR VENDA
             </button>
           ) : (
             <button disabled type="button" className="place-content-center bg-black text-white text-sm rounded-lg focus:ring-black block w-full p-2.5 py-2.5 px-5 mr-2 text-sm font-medium text-white bg-white rounded-lg border border-gray-200 inline-flex items-center">

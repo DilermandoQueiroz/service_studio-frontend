@@ -6,7 +6,7 @@ import { SellCard } from '../../components/SellCard'
 export async function getServerSideProps(context) {
   try {
     const token = nookies.get(context, "__session")
-    const response = await fetch('http://localhost:8000/sell_by_email',
+    const response = await fetch('http://192.168.15.12:8000/sell_by_email',
       {
         headers: {
           'Authorization': `Bearer ${token["__session"]}`

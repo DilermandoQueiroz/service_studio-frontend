@@ -14,11 +14,12 @@ export const Sell = {
 
     console.log(data)
     try {
-      const response = await fetch('http://localhost:8000/sell/create', {
+      const response = await fetch('http://192.168.15.12:8000/sell/create', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}` 
+          'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
+          "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify(data)
       })

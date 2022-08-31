@@ -8,49 +8,128 @@ import useAuth from '../hook/auth';
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
-  const { user, logout  } = useAuth();
-	console.log(user);
+  const [activeTwo, setActiveTwo] = useState(false);
+  const [sellMenu, setSellMenu] = useState(false);
+  const [registerMenu, setRegisterMenu] = useState(false);
+
+  const { user, logout } = useAuth();
   const router = useRouter()
 
   const handleClick = () => {
-    console.log("############ navibarrr #####")
     setActive(!active);
+    setRegisterMenu(false)
+    setSellMenu(false)
   };
-  const pode = () => {
-    return (
-      <>
-        <Link href='/'>
-          <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-            Perfil
-          </a>
-        </Link>
-        <Link href='/register/sell'>
-          <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-            Registrar Vendas
-          </a>
-        </Link>
-        <Link href='/register/client'>
-          <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-            Cadastrar Clientes
-          </a>
-        </Link>
-      </>
-    )
-  }
 
-  const naoPode = () => {
+  const registerHandleClick = () => {
+    setRegisterMenu(!registerMenu);
+
+  };
+
+  const sellHandleClick = () => {
+    setSellMenu(!sellMenu);
+  };
+
+
+  const register = () => {
     return (
       <>
-        <Link href='/signup' >
-          <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-            Sign up
-          </a>
-        </Link>
+        <div>
+          <div onClick={registerHandleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+            Inscrever {!registerMenu && ">"}
+          </div>
+        </div>
+        <div className={`${registerMenu ? '' : 'hidden'}`}>
+          {
+            !user &&
+            <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+              <Link href='/register/provider'>
+                <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  ** provedor
+                </a>
+              </Link>
+            </div>
+          }
+          {
+            user &&
+            <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+              <Link href='/register/client'>
+                <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  ** cliente
+                </a>
+              </Link>
+            </div>
+          }
+          {/* {
+            !user &&
+            <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+              <Link href='/register/studio'>
+                <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  ** estudio
+                </a>
+              </Link>
+            </div>
+          } */}
+
+        </div>
       </>
     )
   }
 
   
+  const sell = () => {
+
+    return (
+      <>
+        {
+          user &&
+          <div>
+            <div onClick={sellHandleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+              Sell {!sellMenu && ">"}
+            </div>
+            <div className={`${sellMenu ? '' : 'hidden'}`}>
+              <div>
+                <Link href='/register/sell'>
+                  <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                    ** registrar
+                  </a>
+                </Link>
+              </div>
+              <div>
+                <Link href='/sell'>
+                  <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                    ** historico
+                  </a>
+                </Link>
+              </div>
+              <div>
+                <Link href='/serviceprovider/clients'>
+                  <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                    ** clientes
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+        }
+
+      </>
+    )
+  }
+
+  const privado = () => {
+    return (
+      <>
+        <Link href='/'>
+          <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+            Perfil
+          </a>
+        </Link>
+      </>
+    )
+  }
+
+
   return (
     <>
       <nav className='flex items-center flex-wrap bg-white p-3 '>
@@ -61,19 +140,18 @@ const Navbar = () => {
             </span>
           </a>
         </Link>
-          {user ? (
-              <Link href="/">
-                <button onClick={() => {
-                  logout()
-                }} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Logout</button>
-              </Link>
-            ) : (
-              <Link href="/login">
-                <button className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sign in</button>
-              </Link>
-            )
-          }
-        
+        {
+          user ? (
+            <Link href="/">
+              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Logout</button>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <button className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sign in</button>
+            </Link>
+          )
+        }
+
         <button
           className='inline-flex p-3 bg-black  rounded lg:hidden text-white ml-auto outline-none ml-0'
           onClick={handleClick}>
@@ -94,17 +172,13 @@ const Navbar = () => {
         </button>
         {/*Note that in this div we will use a ternary operator to decide whether or not to display the content of the div  */}
         <div
-          className={`${
-            active ? '' : 'hidden'
-          }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
+          className={`${active ? '' : 'hidden'
+            }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
         >
           <div className='lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
-            {!user ? ( naoPode()) :( pode())}
-            <Link href='/'>
-                <a className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                  Tatuadores
-                </a>
-            </Link>
+            {user && privado()}
+            {register()}
+            {sell()}
           </div>
         </div>
       </nav>
