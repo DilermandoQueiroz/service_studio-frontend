@@ -1,12 +1,15 @@
 import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAb0EvbZPMBEqhm0V4zY_0f28evf3Vq9A4",
-    authDomain: "easeservice-8a828.firebaseapp.com",
-    projectId: "easeservice-8a828",
-    storageBucket: "easeservice-8a828.appspot.com",
-    messagingSenderId: "375470847270",
-    appId: "1:375470847270:web:295bf6c91aef2098fd7de7"
-  };
+  apiKey: "AIzaSyDu1kuCocON2dA76OVYXmiGxACMqlDUoMU",
+  authDomain: "ease-service-f6352.firebaseapp.com",
+  projectId: "ease-service-f6352",
+  storageBucket: "ease-service-f6352.appspot.com",
+  messagingSenderId: "841452146425",
+  appId: "1:841452146425:web:b6f78369aa773dd0759c28",
+  measurementId: "G-2BDR2N9HTQ"
+};
 
 const app = initializeApp(firebaseConfig)
+export const auth = getAuth()
