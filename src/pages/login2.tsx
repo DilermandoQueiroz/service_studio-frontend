@@ -4,46 +4,73 @@ import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
 import { Link } from '../components/Link'
 import { FormTitle } from '../components/form/FormTitle'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../config/firebase'
 
-const resetPassword = () => {
+const createServiceProvider = async (event) => {
+    event.preventDefault()
+
+    const data = {
+        email: event.target.email.value,
+        password: event.target.password.value,
+        display_name: event.target.name.value,
+        birth_date: "2022-09-10",
+        phone_number: "+5511985760122",
+        cpf: "123123321",
+        description: "ola estou testando"
+    }
+    const JSONdata = JSON.stringify(data)
+     
+    const endpoint = 'http://192.168.0.15:8080/provider/create'
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSONdata,
+    }
+    try {
+        const response = await fetch(endpoint, options)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const login = () => {
     const [page, setPage] = useState('login');
 
-    const createServiceProvider = async (event) => {
+    const loginServiceProvider = async (event) => {
         event.preventDefault()
-
+    
         const data = {
             email: event.target.email.value,
             password: event.target.password.value,
-            display_name: event.target.name.value,
-            birth_date: "2022-09-10",
-            phone_number: "+5511985760122",
-            cpf: "123123321",
-            description: "ola estou testando"
         }
-        const JSONdata = JSON.stringify(data)
-         
-        const endpoint = 'http://192.168.0.15:8080/provider/create'
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSONdata,
-        }
-        try {
-            const response = await fetch(endpoint, options)
-        } catch (err) {
-            console.log(err)
-        }
+    
+        signInWithEmailAndPassword(auth, data.email, data.password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            if (user.emailVerified) {
+                console.log("verificado")
+            }
+            else {
+                setPage("confirmEmail")
+            }
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage)
+        });
     }
 
     if (page == 'login') {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
                     <FormTitle text='Logar'/>
-                    <FormInput text='Email' type='text'/>
-                    <FormInput text='Senha' type='text'/>
+                    <FormInput text='Email' type='text' id='email'/>
+                    <FormInput text='Senha' type='text' id='password'/>
                     <FormButton text='Logar' type='submit'/>
                     <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
                     <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
@@ -133,7 +160,18 @@ const resetPassword = () => {
             </div>
         )
     }
+    else if (page == 'confirmEmail') {
+        return (
+            <div className='m-4 px-4 flex justify-center items-center pt-20'>
+                <div className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+                    <FormTitle text='Entre no seu email para validar sua conta' />
+                    <FormButton text='Reenviar link' type='submit' handleOnChange={() => setPage('confirmEmail')}/>
+                    <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
+                </div>
+            </div>
+        )
+    }
 }
 
 
-export default withPublic(resetPassword)
+export default withPublic(login)
