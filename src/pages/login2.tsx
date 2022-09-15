@@ -4,7 +4,7 @@ import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
 import { Link } from '../components/Link'
 import { FormTitle } from '../components/form/FormTitle'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../config/firebase'
 
 const createServiceProvider = async (event) => {
@@ -14,13 +14,9 @@ const createServiceProvider = async (event) => {
         email: event.target.email.value,
         password: event.target.password.value,
         display_name: event.target.name.value,
-        birth_date: "2022-09-10",
-        phone_number: "+5511985760122",
-        cpf: "123123321",
-        description: "ola estou testando"
     }
     const JSONdata = JSON.stringify(data)
-     
+ 
     const endpoint = 'http://192.168.0.15:8080/provider/create'
     const options = {
         method: 'POST',
@@ -31,6 +27,18 @@ const createServiceProvider = async (event) => {
     }
     try {
         const response = await fetch(endpoint, options)
+        if (response.status == 201) {
+            signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                if (user.emailVerified) {
+                    console.log("verificado")
+                }
+                else {
+                    sendEmailVerification(auth.currentUser)
+                }
+            })
+        }
     } catch (err) {
         console.log(err)
     }
@@ -55,6 +63,10 @@ const login = () => {
             }
             else {
                 setPage("confirmEmail")
+                sendEmailVerification(user)
+                .then(() => {
+                    console.log("enviado")
+                })
             }
         })
         .catch((error) => {
@@ -64,10 +76,28 @@ const login = () => {
         });
     }
 
+    const resetPassword = async (event) => {
+        event.preventDefault()
+
+        const data = {
+            email: event.target.email.value
+        }
+
+        sendPasswordResetEmail(auth, data.email)
+        .then(() => {
+            setPage('confirm')
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        })
+        setPage('confirm')
+    }
+
     if (page == 'login') {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
+                <form className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
                     <FormTitle text='Logar'/>
                     <FormInput text='Email' type='text' id='email'/>
                     <FormInput text='Senha' type='text' id='password'/>
@@ -96,10 +126,10 @@ const login = () => {
     else if (page == 'reset') {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={resetPassword}>
                     <FormTitle text='Entre com seu email para resetar a senha' />
-                    <FormInput type='text' placeholder='Email' />
-                    <FormButton text='Resetar Senha' type='submit' handleOnChange={() => setPage('confirm')}/>
+                    <FormInput type='text' placeholder='Email' id='email'/>
+                    <FormButton text='Resetar Senha' type='submit'/>
                     <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
                 </form>
             </div>
