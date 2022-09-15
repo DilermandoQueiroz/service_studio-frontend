@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
-import {FormClient, FormLogin} from '../components/form/Forms'
+import {FormClient, FormLogin, FormProvider} from '../components/form/Forms'
 import { Link } from '../components/Link'
-import { FormTitle } from '../components/form/FormTitle'
+import { FormTitle,  } from '../components/form/FormTitle'
 import { useForm } from 'react-hook-form'
 
 const resetPassword = ({auth}) => {
     const [page, setPage] = useState('login');
+
+    const {user} = auth
 
     const { control, register, handleSubmit, formState: { errors } } = useForm<any>();
   
@@ -147,6 +149,9 @@ const resetPassword = ({auth}) => {
 
     switch(page) {
         case 'login':
+            // if (user) {
+            //     setPage('create')
+            // }
             return (
                 <FormLogin> 
                     <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
@@ -155,7 +160,11 @@ const resetPassword = ({auth}) => {
             ) 
 
         case 'create':
-            return create()
+            return (
+                <FormProvider>
+
+                </FormProvider>
+            )
         case 'reset':
             return reset()
         case 'confirm':
