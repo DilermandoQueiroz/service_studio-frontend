@@ -1,135 +1,34 @@
 import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
-import { FormInput } from '../components/form/FormInput'
-import { FormButton } from '../components/form/FormButton'
-import {FormClient, FormLogin} from '../components/form/Forms'
+import { FormCreateServiceProvider, FormLogin, FormResetPassword} from '../components/form/Forms'
 import { Link } from '../components/Link'
-import { FormTitle } from '../components/form/FormTitle'
-import { signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from '../config/firebase'
-
-const createServiceProvider = async (event) => {
-    event.preventDefault()
-
-    const data = {
-        email: event.target.email.value,
-        password: event.target.password.value,
-        display_name: event.target.name.value,
-    }
-    const JSONdata = JSON.stringify(data)
- 
-    const endpoint = 'http://192.168.0.15:8080/provider/create'
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSONdata,
-    }
-    try {
-        const response = await fetch(endpoint, options)
-        if (response.status == 201) {
-            signInWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                if (user.emailVerified) {
-                    console.log("verificado")
-                }
-                else {
-                    sendEmailVerification(auth.currentUser)
-                }
-            })
-        }
-    } catch (err) {
-        console.log(err)
-    }
-}
 
 const login = () => {
     const [page, setPage] = useState('login');
 
-    const loginServiceProvider = async (event) => {
-        event.preventDefault()
-    
-        const data = {
-            email: event.target.email.value,
-            password: event.target.password.value,
-        }
-    
-        signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            if (user.emailVerified) {
-                console.log("verificado")
-            }
-            else {
-                setPage("confirmEmail")
-                sendEmailVerification(user)
-                .then(() => {
-                    console.log("enviado")
-                })
-            }
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage)
-        });
-    }
-
-    const resetPassword = async (event) => {
-        event.preventDefault()
-
-        const data = {
-            email: event.target.email.value
-        }
-
-        sendPasswordResetEmail(auth, data.email)
-        .then(() => {
-            setPage('confirm')
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        })
-        setPage('confirm')
-    }
-
     const login = () => {
         return (
-            <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
-                    <FormTitle text='Logar'/>
-                    <FormInput text='Email' type='text' id='email'/>
-                    <FormInput text='Senha' type='text' id='password'/>
-                    <FormButton text='Logar' type='submit'/>
-                    <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                    <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
-                </form>
-            </div>
+            <FormLogin>
+                <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+            </FormLogin>
         )
     }
 
     const create = () => {
         return (
-            <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={createServiceProvider}>
-                   
-                </form>
-            </div>
+            <FormCreateServiceProvider>
+                <Link text='Você já possui uma conta? Logar' handleOnChange={() => setPage('login')}/>
+                <Link text='Clicando em "Criar conta" você está de acordo com os Termos de Serviço' handleOnChange={() => setPage('terms')}/>
+            </FormCreateServiceProvider>
         )
     }
 
     const reset = () => {
         return (
-            <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={resetPassword}>
-                    <FormTitle text='Entre com seu email para resetar a senha' />
-                    <FormInput type='text' placeholder='Email' id='email'/>
-                    <FormButton text='Resetar Senha' type='submit'/>
-                    <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
-                </form>
-            </div>
+            <FormResetPassword>
+                <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
+            </FormResetPassword>
         )
     }
 
@@ -190,23 +89,9 @@ const login = () => {
         )
     }
 
-    const handleFunction = () => {
-        // setLoading(true)
-        // console.log(getValues("email"))
-        // console.log(errors)
-        console.log("my function") 
-        // setLoading(false)
-    }
-
     switch(page) {
         case 'login':
-            return (
-                <FormLogin> 
-                    <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                    <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
-                </FormLogin>
-            ) 
-
+            return login()
         case 'create':
             return create()
         case 'reset':
