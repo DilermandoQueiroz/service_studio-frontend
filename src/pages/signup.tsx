@@ -1,70 +1,107 @@
+import React, { useState } from 'react'
+import { withPublic } from '../hook/route'
+import { FormCreateServiceProvider, FormLogin, FormResetPassword} from '../components/form/Forms'
+import { Link } from '../components/Link'
 
-import React from 'react'
-import { useForm, SubmitHandler } from "react-hook-form"
-import { withPublic } from "../hook/route";
+const signup = () => {
+    const [page, setPage] = useState('create');
 
-
-interface IFormInput {
-  email: string;
-  password: string;
-}
-
-const Signup  = ({ auth, pathname }) => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const { createUserWithEmailAndPassword, user, error } = auth;
-  
-    
-
-  const myOnSubmit: SubmitHandler<IFormInput> =  async (submit) => {
-    try {
-      await createUserWithEmailAndPassword(submit.email, submit.password)
-    } catch (err) {
-      console.log(err)
+    const login = () => {
+        return (
+            <FormLogin>
+                <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+            </FormLogin>
+        )
     }
-  }
- 
-  
-  return (
-      
-      <>
-      <div className='container mx-auto'>
-      <div className="min-h-screen flex items-center justify-center white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow"/>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Create Your Account
-            </h2>
-          </div>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit(myOnSubmit)}>
-            <input type="hidden" name="remember" value="True"/>
-            <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email-address" className="sr-only">Email address</label>
-                <input {...register("email", { required: true })} id="email-address" name="email" type="email" autoComplete="email" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address"/>
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">Password</label>
-                <input {...register("password", { required: true })} id="password" name="password" type="password" autoComplete="current-password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password"/>
-              </div>
+
+    const create = () => {
+        return (
+            <FormCreateServiceProvider>
+                <Link text='Você já possui uma conta? Logar' handleOnChange={() => setPage('login')}/>
+                <Link text='Clicando em "Criar conta" você está de acordo com os Termos de Serviço' handleOnChange={() => setPage('terms')}/>
+            </FormCreateServiceProvider>
+        )
+    }
+
+    const reset = () => {
+        return (
+            <FormResetPassword setPage={setPage}>
+                <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
+            </FormResetPassword>
+        )
+    }
+
+    const confirm = () => {
+        return (
+            <div className='m-4 px-4 flex justify-center items-center pt-20'>
+                <div className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+                    <div className='mb-4 flex'>
+                        <h1 className='text-left text-xl pb-6'>
+                            Se uma conta existir com o email informado,
+                            você recebera um email com as instruções sobre como resetar sua senha.
+                            Se não chegar, verifique sua caixa de spam.
+                        </h1>
+                    </div>
+                    <Link text="Volte para logar" handleOnChange={() => setPage('login')}/>
+                </div>
             </div>
-            <div>
-              <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                </span>
-                CREATE
-              </button>
+        )
+    }
+
+    const terms = () => {
+        return (
+            <div className='m-4 px-4 flex justify-center items-center pt-20'>
+                <div className='max-w-2xl'>
+                    <div className='mb-4 flex'>
+                        <h1 className='text-center text-4xl font-bold pb-6'>Termos de serviço</h1>
+                    </div>
+                    <div className='mb-4 flex'>
+                        <h1 className='text-left text-xl pb-6'>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                        including versions of Lorem Ipsum.
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                        including versions of Lorem Ipsum.
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                        including versions of Lorem Ipsum.
+                        </h1>
+                    </div>
+                    <button onClick={() => setPage('create')} className='font-bold text-sky-500 w-full p-2.5'>
+                        Criar
+                    </button>
+                </div>
             </div>
-          </form>
-        </div>
-      </div>
-      </div>
-      </>
-    
-  )
+        )
+    }
+
+    switch(page) {
+        case 'login':
+            return login()
+        case 'create':
+            return create()
+        case 'reset':
+            return reset()
+        case 'confirm':
+            return confirm()
+        case 'terms':
+            return terms()
+    }
 }
 
-export default withPublic(Signup)
+
+export default withPublic(signup)
