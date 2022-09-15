@@ -15,8 +15,8 @@ const resetPassword = ({auth}) => {
     const { control, register, handleSubmit, formState: { errors } } = useForm<any>();
   
 
-    const createServiceProvider = async (event) => {
-        event.preventDefault()
+const createServiceProvider = async (event) => {
+    event.preventDefault()
 
         const data = {
             email: event.target.email.value,
@@ -47,10 +47,10 @@ const resetPassword = ({auth}) => {
     const login = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+                <form className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
                     <FormTitle text='Logar'/>
-                    <FormInput text='Email' type='text'/>
-                    <FormInput text='Senha' type='text'/>
+                    <FormInput text='Email' type='text' id='email'/>
+                    <FormInput text='Senha' type='text' id='password'/>
                     <FormButton text='Logar' type='submit'/>
                     <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
                     <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
@@ -72,10 +72,10 @@ const resetPassword = ({auth}) => {
     const reset = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={resetPassword}>
                     <FormTitle text='Entre com seu email para resetar a senha' />
-                    <FormInput type='text' placeholder='Email' />
-                    <FormButton text='Resetar Senha' type='submit' handleOnChange={() => setPage('confirm')}/>
+                    <FormInput type='text' placeholder='Email' id='email'/>
+                    <FormButton text='Resetar Senha' type='submit'/>
                     <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
                 </form>
             </div>
@@ -142,7 +142,7 @@ const resetPassword = ({auth}) => {
     const handleFunction = () => {
         // setLoading(true)
         // console.log(getValues("email"))
-        console.log(errors)
+        // console.log(errors)
         console.log("my function") 
         // setLoading(false)
     }
@@ -175,4 +175,4 @@ const resetPassword = ({auth}) => {
 }
 
 
-export default withPublic(resetPassword)
+export default withPublic(login)
