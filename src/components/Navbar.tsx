@@ -45,7 +45,7 @@ const Navbar = () => {
             <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
               <Link href='/register/provider'>
                 <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                  ** provedor
+                  ** Tatuador
                 </a>
               </Link>
             </div>
@@ -143,11 +143,11 @@ const Navbar = () => {
         {
           user ? (
             <Link href="/">
-              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Logout</button>
+              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Ralar peito</button>
             </Link>
           ) : (
-            <Link href="/login">
-              <button className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sign in</button>
+            <Link href="/login2">
+              <button className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Entrar</button>
             </Link>
           )
         }
