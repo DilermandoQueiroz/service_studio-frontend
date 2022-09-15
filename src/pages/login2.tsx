@@ -189,23 +189,11 @@ const login = () => {
             </div>
         )
     }
-<<<<<<< HEAD
-    else if (page == 'confirmEmail') {
-        return (
-            <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <div className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
-                    <FormTitle text='Entre no seu email para validar sua conta' />
-                    <FormButton text='Reenviar link' type='submit' handleOnChange={() => setPage('confirmEmail')}/>
-                    <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
-                </div>
-            </div>
-        )
-=======
 
     const handleFunction = () => {
         // setLoading(true)
         // console.log(getValues("email"))
-        console.log(errors)
+        // console.log(errors)
         console.log("my function") 
         // setLoading(false)
     }
@@ -227,7 +215,6 @@ const login = () => {
             return confirm()
         case 'terms':
             return terms()
->>>>>>> 05f0d5415a8b32db6cd7f6c89ae06f19d1c34c6e
     }
 }
 
