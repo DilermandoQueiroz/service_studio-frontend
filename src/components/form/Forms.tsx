@@ -22,7 +22,7 @@ import { ServiceProvider } from '../../service/ServiceProvider';
 
 
 export function FormLogin({ children }) {
-
+    const router = useRouter()
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false)
     const [passwordHidden, setPasswordHidden] = useState(true)
@@ -33,7 +33,7 @@ export function FormLogin({ children }) {
         .then((userCredential) => {
             const user = userCredential.user;
             if (user.emailVerified) {
-                console.log("verificado")
+                router.push("/")
             }
             else {
                 sendEmailVerification(user)
@@ -111,7 +111,7 @@ export function FormLogin({ children }) {
 }
 
 export function FormCreateServiceProvider({ children }) {
-
+    const router = useRouter()
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false)
     const [passwordHidden, setPasswordHidden] = useState(true)
@@ -140,7 +140,7 @@ export function FormCreateServiceProvider({ children }) {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     if (user.emailVerified) {
-                        console.log("verificado")
+                        router.push("/")
                     }
                     else {
                         sendEmailVerification(auth.currentUser)
@@ -224,13 +224,13 @@ export function FormCreateServiceProvider({ children }) {
     )
 }
 
-export function FormResetPassword({ children }) {
+export function FormResetPassword({ children, setPage }) {
     const { handleSubmit, register, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false)
 
     const myOnSubmit: any = async (submit) => {
         setLoading(true)
-
+        setPage("confirm")
         sendPasswordResetEmail(auth, submit.email)
         .then(() => {
             console.log('confirm')
@@ -240,6 +240,7 @@ export function FormResetPassword({ children }) {
             const errorMessage = error.message;
         })
         setLoading(false)
+        
     }
 
     return (
