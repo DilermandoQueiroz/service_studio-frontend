@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
+import {FormClient, FormLogin} from '../components/form/Forms'
 import { Link } from '../components/Link'
 import { FormTitle } from '../components/form/FormTitle'
+import { useForm } from 'react-hook-form'
 
-const resetPassword = () => {
+const resetPassword = ({auth}) => {
     const [page, setPage] = useState('login');
+
+    const { control, register, handleSubmit, formState: { errors } } = useForm<any>();
+  
 
     const createServiceProvider = async (event) => {
         event.preventDefault()
@@ -37,7 +42,7 @@ const resetPassword = () => {
         }
     }
 
-    if (page == 'login') {
+    const login = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
@@ -51,22 +56,18 @@ const resetPassword = () => {
             </div>
         )
     }
-    else if (page == 'create') {
+
+    const create = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={createServiceProvider}>
-                    <FormTitle text='Tatuador' />
-                    <FormInput text='Email' type='text' id='email'/>
-                    <FormInput text='Senha' type='text' id='password'/>
-                    <FormInput text='Nome' type='text' id='name'/>
-                    <FormButton text='Criar conta' type='submit'/>
-                    <Link text='Você já possui conta? Logar' handleOnChange={() => setPage('login')}/>
-                    <Link text='Clicando em "Criar conta" você está de acordo com os Termos de Serviço' handleOnChange={() => setPage('terms')}/>
+                   
                 </form>
             </div>
         )
     }
-    else if (page == 'reset') {
+
+    const reset = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
@@ -78,7 +79,8 @@ const resetPassword = () => {
             </div>
         )
     }
-    else if (page == 'confirm') {
+
+    const confirm = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <div className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
@@ -94,7 +96,8 @@ const resetPassword = () => {
             </div>
         )
     }
-    else if (page == 'terms') {
+
+    const terms = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <div className='max-w-2xl'>
@@ -132,6 +135,33 @@ const resetPassword = () => {
                 </div>
             </div>
         )
+    }
+
+    const handleFunction = () => {
+        // setLoading(true)
+        // console.log(getValues("email"))
+        console.log(errors)
+        console.log("my function") 
+        // setLoading(false)
+    }
+
+    switch(page) {
+        case 'login':
+            return (
+                <FormLogin> 
+                    <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                    <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                </FormLogin>
+            ) 
+
+        case 'create':
+            return create()
+        case 'reset':
+            return reset()
+        case 'confirm':
+            return confirm()
+        case 'terms':
+            return terms()
     }
 }
 

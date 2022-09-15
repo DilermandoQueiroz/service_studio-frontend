@@ -1,17 +1,19 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { withProtected, withPublic } from "../../hook/route";
-import DatePicker from "react-datepicker";
+
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { IPostClient } from '../../types/index'
 import "react-datepicker/dist/react-datepicker.css";
+import 'react-phone-number-input/style.css'
 import { Client } from '../../service/Client'
 import { ErrorMessage } from '@hookform/error-message';
 import { cpf } from 'cpf-cnpj-validator';
 import { differenceInYears } from 'date-fns';
 import isEmail from 'validator/lib/isEmail';
 import PhoneInput from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
+import DatePicker from "react-datepicker";
+
 
 const RegisterClient = () => {
 
@@ -33,7 +35,7 @@ const RegisterClient = () => {
 
   return (
 
-    <div className='m-4 px-4 flex justify-center items-center'>
+    <div className='m-4 px-4 flex justify-center items-center'> 
       <form className='container lg:mx-auto max-w-sm' onSubmit={handleSubmit(myOnSubmit)}>
         <div className='mb-4 flex'>
           <h1 className='text-2xl font-bold dark:text-black'>Perfil cliente</h1>
