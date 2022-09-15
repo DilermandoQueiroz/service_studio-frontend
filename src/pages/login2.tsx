@@ -3,11 +3,13 @@ import { withPublic } from '../hook/route'
 import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
 import {FormClient, FormLogin, FormProvider} from '../components/form/Forms'
-import { Link } from '../components/Link'
+import { LinkDiller } from '../components/Link'
 import { FormTitle,  } from '../components/form/FormTitle'
 import { useForm } from 'react-hook-form'
+import Link from 'next/link'
 
-const resetPassword = ({auth}) => {
+
+const login = ({auth}) => {
     const [page, setPage] = useState('login');
 
     const {user} = auth
@@ -52,8 +54,8 @@ const createServiceProvider = async (event) => {
                     <FormInput text='Email' type='text' id='email'/>
                     <FormInput text='Senha' type='text' id='password'/>
                     <FormButton text='Logar' type='submit'/>
-                    <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                    <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                    <LinkDiller text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                    <LinkDiller text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
                 </form>
             </div>
         )
@@ -76,7 +78,7 @@ const createServiceProvider = async (event) => {
                     <FormTitle text='Entre com seu email para resetar a senha' />
                     <FormInput type='text' placeholder='Email' id='email'/>
                     <FormButton text='Resetar Senha' type='submit'/>
-                    <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
+                    <LinkDiller text="Cancelar" handleOnChange={() => setPage('login')}/>
                 </form>
             </div>
         )
@@ -93,7 +95,7 @@ const createServiceProvider = async (event) => {
                             Se não chegar, verifique sua caixa de spam.
                         </h1>
                     </div>
-                    <Link text="Volte para logar" handleOnChange={() => setPage('login')}/>
+                    <LinkDiller text="Volte para logar" handleOnChange={() => setPage('login')}/>
                 </div>
             </div>
         )
@@ -154,15 +156,20 @@ const createServiceProvider = async (event) => {
             // }
             return (
                 <FormLogin> 
-                    <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                    <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                    <LinkDiller text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                    <LinkDiller text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
                 </FormLogin>
             ) 
 
         case 'create':
             return (
                 <FormProvider>
-
+                     <div className='px-4 flex justify-center items-center pt-1 my-1.5'>
+                        <p className='text-xs tracking-tighter'>Você já possui conta? <span style={{cursor: "pointer"}} onClick={() => setPage('login')} className='text-blue-600'>Logar</span></p>
+                    </div>
+                    <div className='mb-4 px-4 flex justify-center items-center pt-1 my-1.5'>
+                    <p className='text-xs tracking-tighter text-center'>Clicando em "Criar Conta", você está de acordo com os <span style={{cursor: "pointer"}} className='text-blue-600'>Termos de serviço</span></p>
+                    </div>
                 </FormProvider>
             )
         case 'reset':
