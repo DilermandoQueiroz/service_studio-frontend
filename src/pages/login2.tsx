@@ -2,23 +2,23 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
-import {FormClient, FormLogin, FormProvider} from '../components/form/Forms'
+import { FormClient, FormLogin, FormProvider } from '../components/form/Forms'
 import { LinkDiller } from '../components/Link'
-import { FormTitle,  } from '../components/form/FormTitle'
+import { FormTitle, } from '../components/form/FormTitle'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 
 
-const login = ({auth}) => {
+const login = ({ auth }) => {
     const [page, setPage] = useState('login');
 
-    const {user} = auth
+    const { user } = auth
 
     const { control, register, handleSubmit, formState: { errors } } = useForm<any>();
-  
 
-const createServiceProvider = async (event) => {
-    event.preventDefault()
+
+    const createServiceProvider = async (event) => {
+        event.preventDefault()
 
         const data = {
             email: event.target.email.value,
@@ -30,7 +30,7 @@ const createServiceProvider = async (event) => {
             description: "ola estou testando"
         }
         const JSONdata = JSON.stringify(data)
-         
+
         const endpoint = 'http://192.168.0.15:8080/provider/create'
         const options = {
             method: 'POST',
@@ -50,12 +50,12 @@ const createServiceProvider = async (event) => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
-                    <FormTitle text='Logar'/>
-                    <FormInput text='Email' type='text' id='email'/>
-                    <FormInput text='Senha' type='text' id='password'/>
-                    <FormButton text='Logar' type='submit'/>
-                    <LinkDiller text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                    <LinkDiller text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                    <FormTitle text='Logar' />
+                    <FormInput text='Email' type='text' id='email' />
+                    <FormInput text='Senha' type='text' id='password' />
+                    <FormButton text='Logar' type='submit' />
+                    <LinkDiller text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')} />
+                    <LinkDiller text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')} />
                 </form>
             </div>
         )
@@ -65,7 +65,7 @@ const createServiceProvider = async (event) => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={createServiceProvider}>
-                   
+
                 </form>
             </div>
         )
@@ -74,11 +74,11 @@ const createServiceProvider = async (event) => {
     const reset = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={resetPassword}>
+                <form className='container bg-white  lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
                     <FormTitle text='Entre com seu email para resetar a senha' />
-                    <FormInput type='text' placeholder='Email' id='email'/>
-                    <FormButton text='Resetar Senha' type='submit'/>
-                    <LinkDiller text="Cancelar" handleOnChange={() => setPage('login')}/>
+                    <FormInput type='text' placeholder='Email' id='email' />
+                    <FormButton text='Resetar Senha' type='submit' />
+                    <LinkDiller text="Cancelar" handleOnChange={() => setPage('login')} />
                 </form>
             </div>
         )
@@ -95,7 +95,7 @@ const createServiceProvider = async (event) => {
                             Se não chegar, verifique sua caixa de spam.
                         </h1>
                     </div>
-                    <LinkDiller text="Volte para logar" handleOnChange={() => setPage('login')}/>
+                    <LinkDiller text="Volte para logar" handleOnChange={() => setPage('login')} />
                 </div>
             </div>
         )
@@ -110,27 +110,27 @@ const createServiceProvider = async (event) => {
                     </div>
                     <div className='mb-4 flex'>
                         <h1 className='text-left text-xl pb-6'>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                        including versions of Lorem Ipsum.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                        including versions of Lorem Ipsum.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                        including versions of Lorem Ipsum.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            It has survived not only five centuries, but also the leap into electronic typesetting,
+                            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                            including versions of Lorem Ipsum.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            It has survived not only five centuries, but also the leap into electronic typesetting,
+                            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                            including versions of Lorem Ipsum.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            It has survived not only five centuries, but also the leap into electronic typesetting,
+                            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                            including versions of Lorem Ipsum.
                         </h1>
                     </div>
                     <button onClick={() => setPage('create')} className='font-bold text-sky-500 w-full p-2.5'>
@@ -145,30 +145,34 @@ const createServiceProvider = async (event) => {
         // setLoading(true)
         // console.log(getValues("email"))
         // console.log(errors)
-        console.log("my function") 
+        console.log("my function")
         // setLoading(false)
     }
 
-    switch(page) {
+    switch (page) {
         case 'login':
             // if (user) {
             //     setPage('create')
             // }
             return (
-                <FormLogin> 
-                    <LinkDiller text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                    <LinkDiller text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                <FormLogin>
+                    <div className='px-4 flex justify-center items-center pt-1 my-1.5'>
+                        <p className='text-xs tracking-tighter'>Não possui uma conta? <span style={{ cursor: "pointer" }} onClick={() => setPage('create')} className='text-blue-600'>Crie Uma</span></p>
+                    </div>
+                    <div className='mb-4 px-4 flex justify-center items-center pt-1 my-1.5'>
+                        <p className='text-xs tracking-tighter text-center'><span style={{ cursor: "pointer" }} className='text-blue-600' onClick={() => setPage('reset')}>Esqueceu a senha?</span></p>
+                    </div>
                 </FormLogin>
-            ) 
+            )
 
         case 'create':
             return (
                 <FormProvider>
-                     <div className='px-4 flex justify-center items-center pt-1 my-1.5'>
-                        <p className='text-xs tracking-tighter'>Você já possui conta? <span style={{cursor: "pointer"}} onClick={() => setPage('login')} className='text-blue-600'>Logar</span></p>
+                    <div className='px-4 flex justify-center items-center pt-1 my-1.5'>
+                        <p className='text-xs tracking-tighter'>Você já possui conta? <span style={{ cursor: "pointer" }} onClick={() => setPage('login')} className='text-blue-600'>Logar</span></p>
                     </div>
                     <div className='mb-4 px-4 flex justify-center items-center pt-1 my-1.5'>
-                    <p className='text-xs tracking-tighter text-center'>Clicando em "Criar Conta", você está de acordo com os <span style={{cursor: "pointer"}} className='text-blue-600'>Termos de serviço</span></p>
+                        <p className='text-xs tracking-tighter text-center'>Clicando em "Criar Conta", você está de acordo com os <span style={{ cursor: "pointer" }} className='text-blue-600'>Termos de serviço</span></p>
                     </div>
                 </FormProvider>
             )
