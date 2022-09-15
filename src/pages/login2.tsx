@@ -2,97 +2,46 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
-import {FormClient, FormLogin} from '../components/form/Forms'
+import {FormClient, FormLogin, FormProvider} from '../components/form/Forms'
 import { Link } from '../components/Link'
-import { FormTitle } from '../components/form/FormTitle'
-import { signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from '../config/firebase'
+import { FormTitle,  } from '../components/form/FormTitle'
+import { useForm } from 'react-hook-form'
+
+const resetPassword = ({auth}) => {
+    const [page, setPage] = useState('login');
+
+    const {user} = auth
+
+    const { control, register, handleSubmit, formState: { errors } } = useForm<any>();
+  
 
 const createServiceProvider = async (event) => {
     event.preventDefault()
 
-    const data = {
-        email: event.target.email.value,
-        password: event.target.password.value,
-        display_name: event.target.name.value,
-    }
-    const JSONdata = JSON.stringify(data)
- 
-    const endpoint = 'http://192.168.0.15:8080/provider/create'
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSONdata,
-    }
-    try {
-        const response = await fetch(endpoint, options)
-        if (response.status == 201) {
-            signInWithEmailAndPassword(auth, data.email, data.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                if (user.emailVerified) {
-                    console.log("verificado")
-                }
-                else {
-                    sendEmailVerification(auth.currentUser)
-                }
-            })
-        }
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-const login = () => {
-    const [page, setPage] = useState('login');
-
-    const loginServiceProvider = async (event) => {
-        event.preventDefault()
-    
         const data = {
             email: event.target.email.value,
             password: event.target.password.value,
+            display_name: event.target.name.value,
+            birth_date: "2022-09-10",
+            phone_number: "+5511985760122",
+            cpf: "123123321",
+            description: "ola estou testando"
         }
-    
-        signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            if (user.emailVerified) {
-                console.log("verificado")
-            }
-            else {
-                setPage("confirmEmail")
-                sendEmailVerification(user)
-                .then(() => {
-                    console.log("enviado")
-                })
-            }
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage)
-        });
-    }
-
-    const resetPassword = async (event) => {
-        event.preventDefault()
-
-        const data = {
-            email: event.target.email.value
+        const JSONdata = JSON.stringify(data)
+         
+        const endpoint = 'http://192.168.0.15:8080/provider/create'
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSONdata,
         }
-
-        sendPasswordResetEmail(auth, data.email)
-        .then(() => {
-            setPage('confirm')
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        })
-        setPage('confirm')
+        try {
+            const response = await fetch(endpoint, options)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const login = () => {
@@ -200,6 +149,9 @@ const login = () => {
 
     switch(page) {
         case 'login':
+            // if (user) {
+            //     setPage('create')
+            // }
             return (
                 <FormLogin> 
                     <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
@@ -208,7 +160,11 @@ const login = () => {
             ) 
 
         case 'create':
-            return create()
+            return (
+                <FormProvider>
+
+                </FormProvider>
+            )
         case 'reset':
             return reset()
         case 'confirm':
