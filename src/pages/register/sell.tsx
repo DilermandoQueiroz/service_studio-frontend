@@ -46,6 +46,17 @@ const RegisterSell = ({auth, pathname}) => {
           <label>Preço</label>
           <input {...register("price", { required: true })} pattern="/d*" className='bg-white border-2 border-black border-b-4 text-black-900 text-sm rounded-lg focus:ring-black focus:border-white focus:border-2 block w-full p-2.5' type="number" />
         </div>
+        <div className="relative mb-6">
+          <label>Sessões</label>
+          <input {...register("price", { required: true })} pattern="/d*" className='bg-white border-2 border-black border-b-4 text-black-900 text-sm rounded-lg focus:ring-black focus:border-white focus:border-2 block w-full p-2.5' type="number" />
+        </div>
+        <div className="relative mb-6">
+          <label>Descrição</label>
+          <input {...register("price", { required: true, maxLength: {
+            value: 120,
+            message: "Não pode ter mais de 120 caracteres"
+          } })} className='bg-white border-2 border-black border-b-4 text-black-900 text-sm rounded-lg focus:ring-black focus:border-white focus:border-2 block w-full p-2.5' type="text" />
+        </div>
         <div className='relative mb-6'>
         {
           !loading ? (

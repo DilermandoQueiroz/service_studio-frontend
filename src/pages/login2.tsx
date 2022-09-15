@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormInput } from '../components/form/FormInput'
 import { FormButton } from '../components/form/FormButton'
+import {FormClient, FormLogin} from '../components/form/Forms'
 import { Link } from '../components/Link'
 import { FormTitle } from '../components/form/FormTitle'
 import { signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
@@ -94,7 +95,7 @@ const login = () => {
         setPage('confirm')
     }
 
-    if (page == 'login') {
+    const login = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={loginServiceProvider}>
@@ -108,22 +109,18 @@ const login = () => {
             </div>
         )
     }
-    else if (page == 'create') {
+
+    const create = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={createServiceProvider}>
-                    <FormTitle text='Tatuador' />
-                    <FormInput text='Email' type='text' id='email'/>
-                    <FormInput text='Senha' type='text' id='password'/>
-                    <FormInput text='Nome' type='text' id='name'/>
-                    <FormButton text='Criar conta' type='submit'/>
-                    <Link text='Você já possui conta? Logar' handleOnChange={() => setPage('login')}/>
-                    <Link text='Clicando em "Criar conta" você está de acordo com os Termos de Serviço' handleOnChange={() => setPage('terms')}/>
+                   
                 </form>
             </div>
         )
     }
-    else if (page == 'reset') {
+
+    const reset = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <form className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4' onSubmit={resetPassword}>
@@ -135,7 +132,8 @@ const login = () => {
             </div>
         )
     }
-    else if (page == 'confirm') {
+
+    const confirm = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <div className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
@@ -151,7 +149,8 @@ const login = () => {
             </div>
         )
     }
-    else if (page == 'terms') {
+
+    const terms = () => {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
                 <div className='max-w-2xl'>
@@ -190,6 +189,7 @@ const login = () => {
             </div>
         )
     }
+<<<<<<< HEAD
     else if (page == 'confirmEmail') {
         return (
             <div className='m-4 px-4 flex justify-center items-center pt-20'>
@@ -200,6 +200,34 @@ const login = () => {
                 </div>
             </div>
         )
+=======
+
+    const handleFunction = () => {
+        // setLoading(true)
+        // console.log(getValues("email"))
+        console.log(errors)
+        console.log("my function") 
+        // setLoading(false)
+    }
+
+    switch(page) {
+        case 'login':
+            return (
+                <FormLogin> 
+                    <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                    <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                </FormLogin>
+            ) 
+
+        case 'create':
+            return create()
+        case 'reset':
+            return reset()
+        case 'confirm':
+            return confirm()
+        case 'terms':
+            return terms()
+>>>>>>> 05f0d5415a8b32db6cd7f6c89ae06f19d1c34c6e
     }
 }
 

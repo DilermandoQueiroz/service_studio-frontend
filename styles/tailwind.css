@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 body {
     background-color: #f5f5f5;
+=======
+html {
+    background-color: #eeeeee;
+>>>>>>> 05f0d5415a8b32db6cd7f6c89ae06f19d1c34c6e
 }

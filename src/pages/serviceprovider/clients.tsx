@@ -8,7 +8,7 @@ import nookies from 'nookies'
 export async function getServerSideProps(context) {
   try {
     const token = nookies.get(context, "__session")
-    const response = await fetch('http://192.168.15.12:8000/sell_by_email',
+    const response = await fetch('http://192.168.15.12:8000/get_provider_clients',
       {
         headers: {
           'Authorization': `Bearer ${token["__session"]}`
@@ -16,6 +16,7 @@ export async function getServerSideProps(context) {
       }
     )
     const users = await response.json()
+    
     return {
       props: {
         users

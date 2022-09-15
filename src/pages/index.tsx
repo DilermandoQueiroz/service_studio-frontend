@@ -2,8 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { ServiceProviderCard } from '../components/Card'
 import { withPublic } from '../hook/route'
 import nookies from 'nookies'
-import { Button } from "@material-tailwind/react";
-
 
 
 export async function getServerSideProps(context) {
@@ -17,7 +15,7 @@ export async function getServerSideProps(context) {
       }
     )
     const users = await response.json()
-    console.log(users)
+    
     return {
       props: {
         users
@@ -37,20 +35,17 @@ const serviceProviders = ({ auth, pathname, users }) => {
 
   return (
     <>
-    <Button>opa</Button>
-      <div className='mt-10 px-4 flex justify-center items-center'>
-        <ul className='container lg:mx-auto max-w-md'>
-          {
-            users?.map((user) => (
-              <li key={user.name}>
-                <div>
-                  <ServiceProviderCard user={user}></ServiceProviderCard>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
+     <div className='mt-10 px-4'>
+      <div className='flex justify-center items-center'>
+        <h1 className='text-5xl font-extrabold'>Salve, salve</h1>
       </div>
+      <div className='flex justify-center items-center'>
+        <h1 className='text-5xl font-extrabold' >Sea benvenido</h1>
+      </div>
+      <div className='flex justify-center items-center'>
+        <p>Somos uma plataforma de </p>
+      </div>
+     </div>
     </>
   )
 }
