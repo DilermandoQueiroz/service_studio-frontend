@@ -57,6 +57,9 @@ export interface IPostRegisterSell {
   client_name: string
   service_provider_name: string
   price: number
+  number_of_sessions: number
+  studio_name?: string
+  description: string
   start_time: string
 }
 
