@@ -61,10 +61,15 @@ export interface IPostRegisterSell {
   studio_name?: string
   description: string
   start_time: string
+  scheduler?: any
 }
 
-export interface IPostClient extends Clients {
-
+export interface IPostClient {
+  name: string
+  email: string
+  display_name: string
+  phone_number?: string
+  birth_date: string
 }
 
 export interface IPostProvider extends ServiceProviders {
