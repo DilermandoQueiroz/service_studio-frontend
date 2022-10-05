@@ -143,7 +143,7 @@ const Navbar = () => {
         {
           user ? (
             <Link href="/">
-              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Ralar peito</button>
+              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sair</button>
             </Link>
           ) : (
             <Link href="/login">
