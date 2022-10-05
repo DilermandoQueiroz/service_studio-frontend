@@ -1,10 +1,10 @@
-export function Link({ text, handleOnChange }) {
+export function LinkText({ text, handleOnChange }) {
     return (
-        <button 
+        <button
             className='text-center text-sky-500 w-full pt-6'
             onClick={handleOnChange}
         >
-        {text}
+            {text}
         </button>
     )
 }
