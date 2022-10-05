@@ -5,3 +5,17 @@
 html {
     background-color: #eeeeee;
 }
+
+@layer components {
+    .input {
+        @apply border-2 border-black rounded-lg block w-full p-2.5 focus:outline-none focus:border-blue-500;
+    }
+
+    .formbutton {
+        @apply button
+    }
+
+    .button {
+        @apply bg-black text-white text-xl font-semibold rounded-lg focus:ring-black block w-full p-2.5 hover:-translate-y-0.5 transform transition;
+    }
+}
