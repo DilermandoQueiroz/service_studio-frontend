@@ -1,4 +1,3 @@
-import { json } from 'stream/consumers';
 import { IPostClient } from '../types/index'
 import { v4 as uuidv4 } from 'uuid';
 import { Store } from 'react-notifications-component';
@@ -12,7 +11,7 @@ export const Client = {
         data.birth_date = new Date(data.birth_date).toISOString().split('T')[0]
         data.email = data.email.toLocaleLowerCase()
         try {
-            const response = await fetch('http://192.168.15.12:8000/client/create', {
+            const response = await fetch('http://0.0.0.0:8080/client/create', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -21,7 +20,6 @@ export const Client = {
                 },
                 body: JSON.stringify(data)
             })
-            console.log(data)
             const jsonResponse = await response.json()
             if (response.ok) {
                 Store.addNotification(
@@ -58,8 +56,6 @@ export const Client = {
                 )
                 return false
             }
-
-
         } catch (error) {
             Store.addNotification({
                 title: "Error",
@@ -76,7 +72,5 @@ export const Client = {
             })
             console.log(error)
         }
-
     },
-
 };

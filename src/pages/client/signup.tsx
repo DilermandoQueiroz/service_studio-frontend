@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button } from '../../components/button/Button';
 import { CardBaseSmall, CardTitle } from '../../components/card/CardBase';
 import { FormCreateClient } from '../../components/form/Forms';
+import { LinkText } from '../../components/LinkText';
 import { Terms } from '../../components/terms';
 import { withPublic } from '../../hook/route'
 
@@ -10,8 +11,8 @@ const clientRegister = () => {
 
     function register() {
         return (
-            <FormCreateClient setPage={() => (1+1)}>
-
+            <FormCreateClient setPage={setPage}>
+                <LinkText handleOnChange={() => setPage('terms')} text='Clicando em “Cadastrar”, você está de acordo com os Termos de Serviço'></LinkText>
             </FormCreateClient>
         )
     }

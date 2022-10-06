@@ -84,5 +84,12 @@ export const AuthService = {
 		} catch (e) {
 			return e.message;
 		}
+	},
+	getEmail: async () => {
+		try {
+			return getAuth().currentUser.email
+		} catch (e) {
+			return e.message
+		}
 	}
 };

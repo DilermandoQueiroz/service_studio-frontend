@@ -2,12 +2,24 @@ import { withProtected } from "../../hook/route"
 import { CardBase, CardBaseSmall, CardClient, CardCreateClient, CardHistory, CardSell, CardTitle } from "../../components/card/CardBase"
 import { useState } from "react";
 import { FormSell } from "../../components/form/Forms";
-import { FormButton } from "../../components/form/FormButton";
-import { Link } from "../../components/Link";
+import { Button } from "../../components/button/Button";
+import { LinkText } from "../../components/LinkText";
+import { createSellDb } from "../../service/Sell";
 
 function home() {
 
-    const [page, setPage] = useState('confirmSell');
+    const [page, setPage] = useState('home');
+    const [sellData, setSellData] = useState({
+        client_email: "",
+        service_provider_name: "",
+        client_display_name: "",
+        price: "",
+        number_of_sessions: "",
+        studio_name: "",
+        description: "",
+        start_time: "",
+        last_update: ""
+    })
 
     function showHome() {
         return (
@@ -15,7 +27,7 @@ function home() {
                 <CardBase>
                     <CardTitle text="Meu Trabalho"/>
                     <CardCreateClient />
-                    <CardSell />
+                    <CardSell setPage={() => setPage('createSell')}/>
                     <CardHistory />
                     <CardClient />
                 </CardBase>
@@ -31,54 +43,66 @@ function home() {
 
     function createSell() {
         return (
-            <FormSell setPage={setPage}>
-
+            <FormSell setPage={setPage} setSellData={setSellData}>
+                <LinkText text='cancelar' handleOnChange={() => setPage('home')}></LinkText>
             </FormSell>
         )
     }
 
     function confirmSell() {
+        function submitSell() {
+            if (createSellDb(sellData)) {
+                console.log("sucess")
+                setPage('sucess')
+            }
+        }
+
         return (
             <CardBaseSmall>
                 <CardTitle text={"informações da venda"}/>
                 <div className="border-black border-2 rounded-lg px-4 py-2 px-4 my-4">
-                    <p>Data: 03/08/2022</p>
-                    <p>Numero da venda: 1231923819238</p>
-                    <p>Valor: R$ 420,00</p>
-                    <p>Sessões: 1 de 3</p>
+                    <p>Data: {sellData.last_update}</p>
+                    <p>Valor: R$ {sellData.price}</p>
+                    <p>Sessões: 1 de {sellData.number_of_sessions}</p>
                 </div>
 
                 <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Cliente</p>
-                    <p>Nome: Claudinho buchecha</p>
-                    <p>email: claudinho_pagode@email.com.br</p>
+                    <p>Nome: {sellData.client_display_name}</p>
+                    <p>email: {sellData.client_email}</p>
                     <p>+18</p>
                 </div>
 
-                <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
+                {/* <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Estudio</p>
-                    <p>Nome: Tatuagens legais</p>
-                    <p>CNPJ: 123918230978932</p>
-                    <p>taxa: 30%</p>
-                    <div>contato: tatuagens_legais@estudio.com</div>
-                </div>
+                    <p>Nome: {sellData.studio_name}</p>
+                    <p>CNPJ: </p>
+                    <p>taxa: </p>
+                    <div>contato: </div>
+                </div> */}
 
                 <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Descrição</p>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type
-                        specimen book.</p>
+                    <p>{sellData.description}</p>
                 </div>
 
                 <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Resumo</p>
-                    <p>Valor: R$ 294,00</p>
-                    <p>Taxa: R$ 126,00</p>
-                    <p>Total: R$ 420,00 </p>
+                    <p>Valor: R$ {sellData.price}</p>
+                    <p>Taxa: R$ 0,00</p>
+                    <p>Total: R$ {sellData.price} </p>
                 </div>
-                <FormButton text="Concluir venda" type="text"></FormButton>
-                <Link text='voltar' handleOnChange={() => setPage('createSell')}></Link>
+                <Button text="Concluir venda" type="text" handleOnChange={submitSell} />
+                <LinkText text='voltar' handleOnChange={() => setPage('createSell')} />
+            </CardBaseSmall>
+        )
+    }
+
+    function sucess() {
+        return (
+            <CardBaseSmall>
+                <CardTitle text={"Venda concluída"}/>
+                <Button text="Home" type="text" handleOnChange={() => setPage('home')} />
             </CardBaseSmall>
         )
     }
@@ -90,6 +114,8 @@ function home() {
             return createSell()
         case 'confirmSell':
             return confirmSell()
+        case 'sucess':
+            return sucess()
     }
 }
 

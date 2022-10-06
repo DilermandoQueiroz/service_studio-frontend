@@ -25,8 +25,6 @@ export interface Clients extends SharedInfos {
   complement: string
 }
 
-
-
 export interface Studio extends SharedInfos {
   country: string
   state: string
@@ -59,9 +57,9 @@ export interface IPostRegisterSell {
   price: number
   number_of_sessions: number
   studio_name?: string
-  description: string
+  description?: string
   start_time: string
-  scheduler?: any
+  last_update?: Date
 }
 
 export interface IPostClient {

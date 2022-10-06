@@ -488,7 +488,8 @@ export function FormSell({ children, setPage, setSellData }) {
 
     const myOnSubmit: any = async (submit) => {
         setLoading(true)
-        sellConfirm(submit, setSellData, setPage)
+        sellConfirm(submit, setSellData)
+        setPage("confirmSell")
         setLoading(false)
     }
 
@@ -522,7 +523,6 @@ export function FormCreateClient({ children, setPage }) {
     const myOnSubmit: any = async (submit: IPostClient) => {
         try {
             setLoading(true)
-            console.log(submit)
             if (await Client.createClient(submit)) {
                 setPage('confirmed')
             }
@@ -537,8 +537,8 @@ export function FormCreateClient({ children, setPage }) {
             <FormTitle text="Cliente"/>
             <InputEmail register={register} errors={errors} />
             <InputDisplayName register={register} errors={errors} />
-            <InputPhoneNumber control={control} errors={errors} />
             <InputBirthDay control={control} errors={errors} />
+            <InputPhoneNumber control={control} errors={errors} />
             <FormButton loading={loading} text='Cadastrar'/>
             {children}
         </Form>

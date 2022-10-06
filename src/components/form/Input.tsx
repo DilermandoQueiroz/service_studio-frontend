@@ -91,14 +91,14 @@ export function InputDate({ register, errors }) {
     return (
         <div className="relative mb-6">
             <label>Agendar (Opcional)</label>
-            <input {...register("scheduler",
+            <input {...register("last_update",
                 {
                     required: false,
                     validate: (value) => {
                         if (differenceInHours(new Date(), new Date(value)) > 0) return "Não pode marcar uma data anterior a atual"
                     }
                 })} className='input' type="datetime-local" />
-            <ErrorMessage errors={errors} name="scheduler" />
+            <ErrorMessage errors={errors} name="last_update" />
         </div>
     )
 }
@@ -198,12 +198,12 @@ export function InputPhoneNumber({ control, errors }) {
                 <Controller
                     control={control}
                     name="phone_number"
-                    rules={{ required: "Campo Obrigatório", minLength: 10 }}
+                    rules={{ required: false, minLength: 10 }}
                     render={({ field }) => (
                         <PhoneInput
                             className='input'
                             name="phone_number"
-                            rules={{ required: true }}
+                            rules={{ required: false }}
                             onChange={(phone) => field.onChange(phone)}
                             defaultCountry="BR"
                         />
@@ -233,7 +233,6 @@ export function InputBirthDay({ control, errors}) {
                     render={({ field }) => (
                         <DatePicker
                             className='input'
-                            placeholderText="Select date"
                             selected={field.value}
                             onChange={(date) => field.onChange(date)}
                             dateFormat="dd/MM/yyyy" />
