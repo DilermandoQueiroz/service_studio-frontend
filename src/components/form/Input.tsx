@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import isStrongPassword from 'validator/lib/isStrongPassword'
 import { differenceInDays, differenceInHours, differenceInYears } from 'date-fns';
 import PhoneInput from 'react-phone-number-input'
+import { cpf } from 'cpf-cnpj-validator';
 
 export function InputStudio({ register, errors }) {
     return (
@@ -239,6 +240,27 @@ export function InputBirthDay({ control, errors}) {
                     )} />
             }
             <ErrorMessage errors={errors} name="birth_date" />
+        </div>
+    )
+}
+
+export function InputCPF({ register, errors }) {
+    return (
+        <div className="relative mb-6">
+            <label>CPF</label>
+            <input id='cpf' {...register("cpf",
+                {
+                    required: "Campo Obrigatório",
+                    minLength: {
+                        value: 11,
+                        message: "nao"
+                    },
+                    maxLength: 11,
+                    validate: (value) => {
+                        if (!cpf.isValid(value)) return "Informe um CPF valido"
+                    }
+                })} pattern="\d*+" className='border-2 border-black rounded-lg block w-full p-2.5' type="number" />
+            <ErrorMessage errors={errors} name="cpf" />
         </div>
     )
 }
