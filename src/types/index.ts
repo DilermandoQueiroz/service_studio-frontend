@@ -70,8 +70,10 @@ export interface IPostClient {
   birth_date: string
 }
 
-export interface IPostProvider extends ServiceProviders {
+export interface IPostProvider {
+  email: string
   password: string
+  display_name: string
 }
 
 export interface IPostSell extends Sell {
