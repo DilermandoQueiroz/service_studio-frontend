@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormCreateServiceProvider, FormLogin, FormResetPassword} from '../components/form/Forms'
 import { LinkText } from '../components/LinkText'
-import { Terms } from '../components/terms'
+import { Terms } from '../components/Terms'
 
-const login = () => {
+export function login() {
     const [page, setPage] = useState('login');
 
     const login = () => {
