@@ -32,9 +32,9 @@ function createSell() {
     }
 
     function confirmSell() {
-        function submitSell() {
-            if (createSellDb(sellData)) {
-                console.log("sucess")
+        async function submitSell() {
+            const response = await createSellDb(sellData)
+            if (response) {
                 router.push('/home')
             }
         }

@@ -135,8 +135,10 @@ export function FormSell({ children, setPage, setSellData }) {
 
     const myOnSubmit: any = async (submit) => {
         setLoading(true)
-        sellConfirm(submit, setSellData)
-        setPage("confirmSell")
+        const response = await sellConfirm(submit, setSellData)
+        if (response) {
+            setPage("confirmSell")
+        }
         setLoading(false)
     }
 

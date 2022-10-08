@@ -81,7 +81,7 @@ export async function createSellDb(data) {
         showIcon: true
       }
     })
-    console.log(error)
+    return false
   }
 }
 
@@ -98,21 +98,38 @@ export async function sellConfirm(submit, setSellData) {
   try {
     const response = await fetch(endpoint, options)
     const data = await response.json();
-
-    if (!submit.last_update) {
-      submit.last_update = new Date().toISOString()
+    if (response.ok) {
+      if (!submit.last_update) {
+        submit.last_update = new Date().toISOString()
+      }
+      
+      setSellData((prevState) => ({
+        ...prevState,
+        client_email: submit.client_name,
+        client_display_name: data.display_name,
+        price: submit.price,
+        number_of_sessions: submit.number_of_sessions,
+        studio_name: submit.studio_name,
+        description: submit.description,
+        last_update: submit.last_update,
+      }))
+      return true
+    } else {
+      Store.addNotification({
+        title: "Error",
+        message: "Email do cliente não existe",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+        animationOut: ["animate__animated animate__fadeOut"],
+        dismiss: {
+          duration: 2500,
+          showIcon: true
+        }
+      })
+      return false
     }
-    
-    setSellData((prevState) => ({
-      ...prevState,
-      client_email: submit.client_name,
-      client_display_name: data.display_name,
-      price: submit.price,
-      number_of_sessions: submit.number_of_sessions,
-      studio_name: submit.studio_name,
-      description: submit.description,
-      last_update: submit.last_update,
-    }))
   }
   catch (error) {
     console.log(error)
