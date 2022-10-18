@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormCreateServiceProvider, FormLogin, FormResetPassword} from '../components/form/Forms'
 import { LinkText } from '../components/LinkText'
-import { Terms } from '../components/Terms'
+import { TermsService } from '../components/TermsService'
 
 export function login() {
     const [page, setPage] = useState('login');
@@ -52,7 +52,7 @@ export function login() {
 
     const terms = () => {
         return (
-            <Terms setPage={() => setPage("create")}/>
+            <TermsService setPage={() => setPage("create")}/>
         )
     }
 
