@@ -19,14 +19,14 @@ export function AuthProvider(props) {
 	const pathname = router.pathname;
 	
 	const loginWithGoogle = async () => {
-		const { error, user } = await AuthService.loginWithGoogle();
+		const { error, userCred } = await AuthService.loginWithGoogle();
 		if (error) {
 			setError({
 				pathname: pathname,
 				error: error
 			});
 		}
-		setUser(user ?? null);
+		setUser(userCred ?? null);
 	};
 
 	const logout = async () => {
@@ -36,7 +36,7 @@ export function AuthProvider(props) {
 
 	const createUserWithEmailAndPassword = async (email, password) => {
 		if (email && password) {
-			const { error, user } = await AuthService.createUserWithEmailAndPassword(
+			const { error, userCred } = await AuthService.createUserWithEmailAndPassword(
 				email,
 				password
 			);
@@ -47,7 +47,7 @@ export function AuthProvider(props) {
 				});
 				return;
 			}
-			setUser(user ?? null);
+			setUser(userCred ?? null);
 			router.push(`/verify?email=${email}`);
 		} else {
 			setError({
@@ -59,7 +59,7 @@ export function AuthProvider(props) {
 
 	const signInUserWithEmailAndPassword = async (email, password) => {
 		if (email && password) {
-			const { error, user } = await AuthService.signInUserWithEmailAndPassword(
+			const { error, userCred } = await AuthService.signInUserWithEmailAndPassword(
 				email,
 				password
 			);
@@ -70,7 +70,7 @@ export function AuthProvider(props) {
 				});
 				return;
 			}
-			setUser(user ?? null);
+			setUser(userCred ?? null);
 			router.push("/");
 		} else {
 			setError({
