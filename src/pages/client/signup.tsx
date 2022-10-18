@@ -3,7 +3,7 @@ import { Button } from '../../components/button/Button';
 import { CardBaseSmall, CardTitle } from '../../components/card/CardBase';
 import { FormCreateClient } from '../../components/form/Forms';
 import { LinkText } from '../../components/LinkText';
-import { Terms } from '../../components/terms';
+import { TermsService } from '../../components/TermsService';
 import { withPublic } from '../../hook/route'
 
 const clientRegister = () => {
@@ -28,7 +28,7 @@ const clientRegister = () => {
 
     function terms() {
         return (
-            <Terms setPage={() => setPage("register")} />
+            <TermsService setPage={() => setPage("register")} />
         )
     }
 
