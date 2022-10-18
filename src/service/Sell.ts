@@ -1,12 +1,13 @@
-import { IPostRegisterSell } from '../types/index'
 import { Store } from 'react-notifications-component';
 import nookies from 'nookies'
 import { AuthService } from './AuthService';
+import { IPostRegisterSell } from '../types';
 
 export async function createSellDb(data) {
   let serviceProviderEmail = await AuthService.getEmail();
+  data.number_of_sessions = parseInt(data.number_of_sessions)
 
-  const dataCreateSell = {
+  const dataCreateSell: IPostRegisterSell = {
     client_name: data.client_email,
     service_provider_name: serviceProviderEmail,
     number_of_sessions: data.number_of_sessions,
@@ -15,12 +16,11 @@ export async function createSellDb(data) {
     last_update: data.last_update,
     description: data.description
   }
-
   dataCreateSell.start_time = new Date().toISOString()
   dataCreateSell.price = parseFloat(Math.ceil(data.price).toFixed(1))
 
   try {
-    const response = await fetch('http://0.0.0.0:8080/sell/create', {
+    const response = await fetch('/api/sell/create', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -29,44 +29,29 @@ export async function createSellDb(data) {
       },
       body: JSON.stringify(dataCreateSell)
     })
-
     const jsonResponse = await response.json()
+    
+    Store.addNotification(
+      {
+        title: response.status == 201 ? 'Venda criada' : 'Error',
+        message: response.status == 422 ? "Verifique os parametros enviados" : jsonResponse.detail,
+        type: response.ok ? "success" : "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+        animationOut: ["animate__animated animate__fadeOut"],
+        dismiss: {
+          duration: 2500,
+          showIcon: true
+        }
+      },
+    )
+    
     if (response.ok) {
-
-      Store.addNotification(
-        {
-          title: response.status == 201 ? 'Venda criada' : 'Error',
-          message: response.status == 422 ? "Verifique os parametros enviados" : jsonResponse.detail,
-          type: response.ok ? "success" : "danger",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
-          animationOut: ["animate__animated animate__fadeOut"],
-          dismiss: {
-            duration: 2500,
-            showIcon: true
-          }
-        },
-      )
       return true
-    } else {
-      Store.addNotification(
-        {
-          title: response.status == 201 ? 'Venda criada' : 'Error',
-          message: response.status == 422 ? "Verifique os parametros enviados" : jsonResponse.detail,
-          type: response.ok ? "success" : "danger",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
-          animationOut: ["animate__animated animate__fadeOut"],
-          dismiss: {
-            duration: 2500,
-            showIcon: true
-          }
-        },
-      )
-      return false
     }
+
+    return false
   } catch (error) {
     Store.addNotification({
       title: "Error",
@@ -86,23 +71,22 @@ export async function createSellDb(data) {
 }
 
 export async function sellConfirm(submit, setSellData) {
-  const options = {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
-      "Access-Control-Allow-Origin": "*"
-    }
-  }
-  const endpoint = 'http://0.0.0.0:8080/client/name?email=' + submit.client_name
   try {
-    const response = await fetch(endpoint, options)
+    const response = await fetch('/api/client/' + submit.client_name, { 
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
+        "Access-Control-Allow-Origin": "*"
+      } 
+    })
     const data = await response.json();
+
     if (response.ok) {
       if (!submit.last_update) {
         submit.last_update = new Date().toISOString()
       }
-      
+
       setSellData((prevState) => ({
         ...prevState,
         client_email: submit.client_name,
@@ -113,6 +97,7 @@ export async function sellConfirm(submit, setSellData) {
         description: submit.description,
         last_update: submit.last_update,
       }))
+
       return true
     } else {
       Store.addNotification({
@@ -134,5 +119,5 @@ export async function sellConfirm(submit, setSellData) {
   catch (error) {
     console.log(error)
   }
-  
+
 }
