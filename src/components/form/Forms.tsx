@@ -149,8 +149,8 @@ export function FormSell({ children, setPage, setSellData }) {
             <InputPrice register={register} errors={errors}/>
             <InputSession register={register} errors={errors}/>
             {/* <InputStudio register={register} errors={errors}/> */}
-            {/* <InputSchedulerDate errors={errors} control={control}/> */}
-            <InputDate register={register} errors={errors}/>
+            <InputSchedulerDate errors={errors} control={control}/>
+            {/* <InputDate register={register} errors={errors}/> */}
             <InputDescription register={register} errors={errors}/>
             
             {/* <div className="relative mb-6">
