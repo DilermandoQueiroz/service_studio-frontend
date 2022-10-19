@@ -2,6 +2,7 @@ import { withProtected } from "../../hook/route"
 import { CardBase, CardBaseSmall, CardClient, CardCreateClient, CardHistory, CardSell, CardTitle } from "../../components/card/CardBase"
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function home() {
 
@@ -13,8 +14,8 @@ function home() {
             <CardBase>
                 <CardTitle text="Meu Trabalho"/>
                 <CardCreateClient />
-                <CardSell setPage={() => {router.push('/home/sell')}}/>
-                <CardHistory />
+                <CardSell/>
+                <CardHistory/>
                 <CardClient />
             </CardBase>
             <CardBase>
