@@ -1,6 +1,7 @@
 import {IPostProvider} from '../types/index'
 import { Store } from 'react-notifications-component';
 import { AuthService} from './AuthService'
+import nookies from 'nookies'
 
 export const ServiceProvider = {
 
