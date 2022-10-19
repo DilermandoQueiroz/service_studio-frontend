@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router'
-import { withPublic } from "../hook/route";
 import useAuth from '../hook/auth';
-
-
+import nookies from 'nookies'
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
@@ -30,6 +28,21 @@ const Navbar = () => {
     setSellMenu(!sellMenu);
   };
 
+  const deleteAccount = async () => {
+    handleClick()
+    const options = {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
+    const endpoint = process.env.NEXT_PUBLIC_API_ROUTE + 'provider/remove'
+    const response = await fetch(endpoint, options)
+    const data = await response.json();
+    console.log(data)
+  }
 
   const register = () => {
     return (
@@ -53,7 +66,7 @@ const Navbar = () => {
           {
             user &&
             <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
-              <Link href='/register/client'>
+              <Link href='/client/signup'>
                 <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
                   ** cliente
                 </a>
@@ -89,7 +102,7 @@ const Navbar = () => {
             </div>
             <div className={`${sellMenu ? '' : 'hidden'}`}>
               <div>
-                <Link href='/register/sell'>
+                <Link href='/home/sell'>
                   <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
                     ** registrar
                   </a>
@@ -125,6 +138,9 @@ const Navbar = () => {
             Perfil
           </a>
         </Link>
+        <a onClick={deleteAccount} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+          Excluir
+        </a>
       </>
     )
   }
@@ -143,7 +159,7 @@ const Navbar = () => {
         {
           user ? (
             <Link href="/">
-              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Ralar peito</button>
+              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sair</button>
             </Link>
           ) : (
             <Link href="/login">

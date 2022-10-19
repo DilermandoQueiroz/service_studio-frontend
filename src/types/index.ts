@@ -25,8 +25,6 @@ export interface Clients extends SharedInfos {
   complement: string
 }
 
-
-
 export interface Studio extends SharedInfos {
   country: string
   state: string
@@ -57,15 +55,25 @@ export interface IPostRegisterSell {
   client_name: string
   service_provider_name: string
   price: number
+  number_of_sessions: number
+  studio_name?: string
+  description?: string
   start_time: string
+  last_update?: Date
 }
 
-export interface IPostClient extends Clients {
-
+export interface IPostClient {
+  name: string
+  email: string
+  display_name: string
+  phone_number?: string
+  birth_date: string
 }
 
-export interface IPostProvider extends ServiceProviders {
+export interface IPostProvider {
+  email: string
   password: string
+  display_name: string
 }
 
 export interface IPostSell extends Sell {

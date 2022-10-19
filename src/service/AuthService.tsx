@@ -10,7 +10,6 @@ import {
   deleteUser,
   updatePassword,
   signInWithEmailAndPassword,
-	getIdToken
 } from "firebase/auth";
 
 
@@ -22,12 +21,14 @@ export const AuthService = {
 		try {
 			const userCred = await signInWithPopup(getAuth(), provider);
 			return {
-				user: userCred.user,
-			};
+				userCred: userCred,
+				success: true
+			}
 		} catch (e) {
 			return {
-				error: e.message,
-			};
+				error: e,
+				success: false
+			}
 		}
 	},
 	logout: async () => {
@@ -38,33 +39,37 @@ export const AuthService = {
 	createUserWithEmailAndPassword: async (email, password) => {
 		try {
 			const userCred = await createUserWithEmailAndPassword(getAuth(), email, password);
-			await sendEmailVerification(userCred.user, {
-				url: "http://localhost:3000",
+			sendEmailVerification(userCred.user, {
+				url: "http://0.0.0.0:3000/home",
 			});
 			return {
-				user: userCred.user,
-			};
+				userCred: userCred,
+				success: true
+			}
 		} catch (e) {
 			return {
-				error: e.message,
-			};
+				error: e,
+				success: false
+			}
 		}
 	},
 	signInUserWithEmailAndPassword: async (email, password) => {
 		try {
 			const userCred = await signInWithEmailAndPassword(getAuth(), email, password);
 			return {
-				user: userCred.user,
-			};
+				userCred: userCred,
+				success: true
+			}
 		} catch (e) {
 			return {
-				error: e.message,
-			};
+				error: e,
+				success: false
+			}
 		}
 	},
 	resetPassword: async (email) => {
 		try {
-			await sendPasswordResetEmail(getAuth(), email, { url: "http://localhost:3000/login" });
+			await sendPasswordResetEmail(getAuth(), email);
 		} catch (e) {
 			return e.message;
 		}
@@ -84,5 +89,27 @@ export const AuthService = {
 		} catch (e) {
 			return e.message;
 		}
+	},
+	getEmail: async () => {
+		try {
+			return getAuth().currentUser.email
+		} catch (e) {
+			return e.message
+		}
+	},
+	getEmailVerified: async () => {
+		try {
+			return getAuth().currentUser.emailVerified
+		} catch (e) {
+			return e.message
+		}
+	},
+	sendEmailVerification: (user) => {
+		try {
+			return sendEmailVerification(user)
+		} catch (e) {
+			return e.message
+		}
+
 	}
 };

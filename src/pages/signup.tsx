@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { withPublic } from '../hook/route'
 import { FormCreateServiceProvider, FormLogin, FormResetPassword} from '../components/form/Forms'
-import { Link } from '../components/Link'
+import { LinkText } from '../components/LinkText'
 
-const signup = () => {
+const login = () => {
     const [page, setPage] = useState('create');
 
     const login = () => {
         return (
             <FormLogin>
-                <Link text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
-                <Link text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
+                <LinkText text='Não possui conta? Crie uma' handleOnChange={() => setPage('create')}/>
+                <LinkText text='Esqueceu sua senha?' handleOnChange={() => setPage('reset')}/>
             </FormLogin>
         )
     }
@@ -18,8 +18,8 @@ const signup = () => {
     const create = () => {
         return (
             <FormCreateServiceProvider>
-                <Link text='Você já possui uma conta? Logar' handleOnChange={() => setPage('login')}/>
-                <Link text='Clicando em "Criar conta" você está de acordo com os Termos de Serviço' handleOnChange={() => setPage('terms')}/>
+                <LinkText text='Você já possui uma conta? Logar' handleOnChange={() => setPage('login')}/>
+                <LinkText text='Clicando em "Criar conta" você está de acordo com os Termos de Serviço' handleOnChange={() => setPage('terms')}/>
             </FormCreateServiceProvider>
         )
     }
@@ -27,15 +27,15 @@ const signup = () => {
     const reset = () => {
         return (
             <FormResetPassword setPage={setPage}>
-                <Link text="Cancelar" handleOnChange={() => setPage('login')}/>
+                <LinkText text="Cancelar" handleOnChange={() => setPage('login')}/>
             </FormResetPassword>
         )
     }
 
     const confirm = () => {
         return (
-            <div className='m-4 px-4 flex justify-center items-center pt-20'>
-                <div className='container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4'>
+            <div className='m-4 flex justify-center items-center'>
+                <div className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4'>
                     <div className='mb-4 flex'>
                         <h1 className='text-left text-xl pb-6'>
                             Se uma conta existir com o email informado,
@@ -43,7 +43,7 @@ const signup = () => {
                             Se não chegar, verifique sua caixa de spam.
                         </h1>
                     </div>
-                    <Link text="Volte para logar" handleOnChange={() => setPage('login')}/>
+                    <LinkText text="Volte para logar" handleOnChange={() => setPage('login')}/>
                 </div>
             </div>
         )
@@ -104,4 +104,4 @@ const signup = () => {
 }
 
 
-export default withPublic(signup)
+export default withPublic(login)
