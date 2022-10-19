@@ -34,7 +34,7 @@ export function InputSession({ register, errors }) {
                     validate: (value) => {
                         if (value < 0) return "Valor inválido"
                     }
-                })} className='input' type="text" />
+                })} className='input' type="number" min="1"/>
             <ErrorMessage errors={errors} name="number_of_sessions" />
         </div>
     )
@@ -50,7 +50,7 @@ export function InputClientEmail({ register, errors }) {
                     validate: (value) => {
                         if (!isEmail(value)) return "Email inválido"
                     }
-                })} className='input' type="text"/>
+                })} className='input' type="email"/>
             <ErrorMessage errors={errors} name="client_name" />
         </div>
     )
@@ -66,7 +66,7 @@ export function InputPrice({ register, errors }) {
                     validate: (value) => {
                         if (value < 0) return "Valor inválido"
                     }
-                })} className='input' type="currency" />
+                })} className='input' type="number" min="0" />
             <ErrorMessage errors={errors} name="price" />
         </div>
     )
@@ -111,7 +111,7 @@ export function InputSchedulerDate({ errors, control }) {
             {
                 <Controller
                     control={control}
-                    name="scheduler"
+                    name="last_update"
                     rules={{
                         required: false,
                         validate: (value) => {
@@ -126,7 +126,7 @@ export function InputSchedulerDate({ errors, control }) {
                             dateFormat="dd/MM/yyyy" />
                     )} />
             }
-            <ErrorMessage errors={errors} name="scheduler" />
+            <ErrorMessage errors={errors} name="last_update" />
         </div>
     )
 }
