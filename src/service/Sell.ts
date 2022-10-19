@@ -85,6 +85,8 @@ export async function sellConfirm(submit, setSellData) {
     if (response.ok) {
       if (!submit.last_update) {
         submit.last_update = new Date().toISOString()
+      } else {
+        submit.last_update = new Date(submit.last_update).toISOString()
       }
 
       setSellData((prevState) => ({
