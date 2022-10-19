@@ -7,13 +7,10 @@ const serviceProviders = () => {
     <>
      <div className='mt-10 px-4'>
       <div className='flex justify-center items-center'>
-        <h1 className='text-5xl font-extrabold'>Salve, salve</h1>
+        <h1 className='text-5xl font-extrabold'>Página de incio</h1>
       </div>
       <div className='flex justify-center items-center'>
-        <h1 className='text-5xl font-extrabold' >Sea benvenido</h1>
-      </div>
-      <div className='flex justify-center items-center'>
-        <p>Somos uma plataforma de </p>
+        <h1 className='text-5xl font-extrabold' >Em construção</h1>
       </div>
      </div>
     </>
