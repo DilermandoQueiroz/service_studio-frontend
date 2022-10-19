@@ -5,8 +5,11 @@
 // import { setTimeout } from 'timers/promises'
 // import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 // import { createMuiTheme } from '@material-ui/core/styles';
+import nookies from 'nookies'
+import { TableSells } from '../../components/table/Table'
 
 import { withProtected } from "../../hook/route"
+import { getAllSellsData } from '../api/provider/sells'
 
 // export async function getServerSideProps(context) {
 //   try {
@@ -136,13 +139,21 @@ import { withProtected } from "../../hook/route"
 // }
 
 // export default withProtected(Home)
+// NextJS Material Dashboard 2 Examples
 
+export async function getServerSideProps(context) {
+    const token = nookies.get(context, "__session")
+    const response = await getAllSellsData(`Bearer ${token["__session"]}`)
+    const sells = await response.json()
+  
+    return {
+      props: { sells }
+    }
+}
 
-function SalesHistory() {
+function SalesHistory(props) {
     return (
-        <div>
-            Vendas
-        </div>
+        <TableSells props={props}/>
     )
 }
 

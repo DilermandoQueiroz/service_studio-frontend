@@ -2,10 +2,11 @@
 // import { ClientCard } from '../../components/ClientCard'
 // import { withProtected } from '../../hook/route'
 // import nookies from 'nookies'
-
 import { withProtected } from "../../hook/route"
-
-
+import { getAllClientsData } from "../api/provider/clients";
+import nookies from 'nookies'
+import { GetServerSidePropsContext } from "next";
+import { TableClients } from "../../components/table/Table";
 
 // export async function getServerSideProps(context) {
 //   try {
@@ -50,12 +51,19 @@ import { withProtected } from "../../hook/route"
 //     </>
 //   )
 // }
+export async function getServerSideProps(context) {
+  const token = nookies.get(context, "__session")
+  const response = await getAllClientsData(`Bearer ${token["__session"]}`)
+  const clients = await response.json()
 
+  return {
+    props: { clients }
+  }
+}
 
-// export default withProtected(ClientsProvider)
-function ClientsProvider() {
+function ClientsProvider(props) {
   return (
-    <div>clients</div>
+    <TableClients props={props}/>
   )
 }
 
