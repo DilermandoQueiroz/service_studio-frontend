@@ -13,11 +13,11 @@ export function Home() {
                         Você pode melhorar a organização do seu trabalho de uma maneira simples e fácil,
                         agendando sessões com seus clientes e estúdios.
                         </p>
-                        {/* <Link href='/signup'> */}
+                        <Link href='/signup'>
                             <button type="submit" className='mt-10 max-w-xs m-auto bg-black text-white text-xl font-semibold rounded-lg focus:ring-black block w-full p-2.5 button-movement'>
                             Participar
                             </button>
-                        {/* </Link> */}
+                        </Link>
                         <div className='flex flex-col items-center sm:grid-cols-2 sm:grid sm:flex max-w-full sm:flex-col mt-10 bg-white container lg:mx-auto m-auto border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4'>
                             <p className="text-center">
                             Junte-se a outros estudios e tatuadores participando do desenvolvemento de uma solução para o mercado.
