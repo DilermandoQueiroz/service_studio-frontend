@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-    background-color: #eeeeee;
+    background-color: rgb(250, 250, 250);
 }
 
 @layer components {
@@ -16,6 +16,10 @@ html {
     }
 
     .button {
-        @apply bg-black text-white text-xl font-semibold rounded-lg focus:ring-black block w-full p-2.5 hover:-translate-y-0.5 transform transition;
+        @apply bg-black text-white text-xl font-semibold rounded-lg focus:ring-black block w-full p-2.5 button-movement;
+    }
+
+    .button-movement {
+        @apply hover:-translate-y-0.5 transform transition
     }
 }
