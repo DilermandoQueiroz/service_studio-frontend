@@ -48,16 +48,16 @@ const Navbar = () => {
     return (
       <>
         <div>
-          <div onClick={registerHandleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-            Inscrever {!registerMenu && ">"}
+          <div onClick={registerHandleClick} className='cursor-pointer button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
+            Inscrever {!registerMenu ? ">" : "∨"}
           </div>
         </div>
         <div className={`${registerMenu ? '' : 'hidden'}`}>
           {
             !user &&
-            <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+            <div className='ml-2.5 items-start flex flex-col'>
               <Link href='/signup'>
-                <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                <a onClick={handleClick} className='w-full px-3 py-2 rounded font-bold items-center justify-center'>
                   ** Tatuador
                 </a>
               </Link>
@@ -65,9 +65,9 @@ const Navbar = () => {
           }
           {
             user &&
-            <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+            <div className='ml-2.5 items-start flex flex-col'>
               <Link href='/client/signup'>
-                <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                <a onClick={handleClick} className='w-full px-3 py-2 rounded font-bold items-center justify-center'>
                   ** cliente
                 </a>
               </Link>
@@ -75,9 +75,9 @@ const Navbar = () => {
           }
           {/* {
             !user &&
-            <div className='ml-2.5 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+            <div className='ml-2.5  lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
               <Link href='/register/studio'>
-                <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                <a onClick={handleClick} className='w-full px-3 py-2 rounded font-bold items-center justify-center'>
                   ** estudio
                 </a>
               </Link>
@@ -97,27 +97,27 @@ const Navbar = () => {
         {
           user &&
           <div>
-            <div onClick={sellHandleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
-              Sell {!sellMenu && ">"}
+            <div onClick={sellHandleClick} className='cursor-pointer button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
+              Vendas {!sellMenu ? ">" : "∨"}
             </div>
             <div className={`${sellMenu ? '' : 'hidden'}`}>
               <div>
                 <Link href='/home/sell'>
-                  <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  <a onClick={handleClick} className='mt-2 button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
                     ** registrar
                   </a>
                 </Link>
               </div>
               <div>
                 <Link href='/sell'>
-                  <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  <a onClick={handleClick} className='button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
                     ** historico
                   </a>
                 </Link>
               </div>
               <div>
                 <Link href='/serviceprovider/clients'>
-                  <a onClick={handleClick} className='ml-2.5 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  <a onClick={handleClick} className='button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
                     ** clientes
                   </a>
                 </Link>
@@ -134,11 +134,11 @@ const Navbar = () => {
     return (
       <>
         <Link href='/'>
-          <a onClick={handleClick} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+          <a onClick={handleClick} className='button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
             Perfil
           </a>
         </Link>
-        <a onClick={deleteAccount} className='lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center'>
+        <a onClick={deleteAccount} className='cursor-pointer button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
           Excluir
         </a>
       </>
@@ -148,9 +148,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='flex items-center flex-wrap p-3 '>
+      <nav className='max-w-6xl m-auto flex items-center flex-wrap p-4 '>
         <Link href='/'>
-          <a className='inline-flex items-center p-2 mr-4 '>
+          <a className='inline-flex items-center mr-4 '>
             <span className='text-xl text-black font-bold uppercase tracking-wide'>
               EASE SERVICE
             </span>
@@ -159,17 +159,17 @@ const Navbar = () => {
         {
           user ? (
             <Link href="/">
-              <button onClick={logout} className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Sair</button>
+              <button onClick={logout} className='button-movement inline-flex p-3 bg-black rounded text-white ml-auto outline-none mr-2.5'>Sair</button>
             </Link>
           ) : (
             <Link href="/login">
-              <button className='inline-flex p-3 bg-black rounded lg:hidden text-white ml-auto outline-none mr-2.5'>Entrar</button>
+              <button className='button-movement inline-flex p-3 bg-black rounded text-white ml-auto outline-none mr-2.5'>Entrar</button>
             </Link>
           )
         }
 
         <button
-          className='inline-flex p-3 bg-black  rounded lg:hidden text-white ml-auto outline-none ml-0'
+          className='inline-flex p-3 bg-black  rounded text-white ml-auto outline-none ml-0'
           onClick={handleClick}>
           <svg
             className='w-6 h-6'
@@ -189,9 +189,9 @@ const Navbar = () => {
         {/*Note that in this div we will use a ternary operator to decide whether or not to display the content of the div  */}
         <div
           className={`${active ? '' : 'hidden'
-            }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
+            }   w-full `}
         >
-          <div className='lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
+          <div className='items-start  flex flex-col'>
             {user && privado()}
             {register()}
             {sell()}
