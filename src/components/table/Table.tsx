@@ -35,7 +35,7 @@ export function TableClients({ props }) {
 
 export function TableSells({ props }) {
     return (
-        <div className="overflow-x-auto relative m-4 rounded-lg shadow-md">
+        <div className="border-black border-2 overflow-x-auto relative m-4 rounded-lg shadow-md">
           <table className="w-full text-sm text-left text-black-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
