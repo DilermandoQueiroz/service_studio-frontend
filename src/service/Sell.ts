@@ -1,24 +1,21 @@
 import { Store } from 'react-notifications-component';
 import nookies from 'nookies'
-import { AuthService } from './AuthService';
-import { IPostRegisterSell } from '../types';
+import { SellCreate } from '../types/Sell';
 
 export async function createSellDb(data) {
-  let serviceProviderEmail = await AuthService.getEmail();
-  data.number_of_sessions = parseInt(data.number_of_sessions)
-
-  const dataCreateSell: IPostRegisterSell = {
-    client_name: data.client_email,
-    service_provider_name: serviceProviderEmail,
-    number_of_sessions: data.number_of_sessions,
+  const dataCreateSell: SellCreate = {
+    studio_id: null,
+    client_email: data.client_email,
+    actual_session: 1,
     price: data.price,
     start_time: data.start_time,
-    last_update: data.last_update,
-    description: data.description
+    scheduled_time: data.scheduled_time,
+    description: data.description,
+    finished: false
   }
   dataCreateSell.start_time = new Date().toISOString()
   dataCreateSell.price = parseFloat(Math.ceil(data.price).toFixed(1))
-
+  console.log(dataCreateSell)
   try {
     const response = await fetch('/api/sell/create', {
       method: 'POST',
@@ -30,7 +27,7 @@ export async function createSellDb(data) {
       body: JSON.stringify(dataCreateSell)
     })
     const jsonResponse = await response.json()
-    
+
     Store.addNotification(
       {
         title: response.status == 201 ? 'Venda criada' : 'Error',
@@ -46,7 +43,7 @@ export async function createSellDb(data) {
         }
       },
     )
-    
+
     if (response.ok) {
       return true
     }
@@ -72,32 +69,32 @@ export async function createSellDb(data) {
 
 export async function sellConfirm(submit, setSellData) {
   try {
-    const response = await fetch('/api/client/' + submit.client_name, { 
+    const response = await fetch('/api/client/' + submit.client_email, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
         'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
         "Access-Control-Allow-Origin": "*"
-      } 
+      }
     })
+
     const data = await response.json();
 
     if (response.ok) {
-      if (!submit.last_update) {
-        submit.last_update = new Date().toISOString()
+      if (!submit.start_time) {
+        submit.start_time = new Date().toISOString()
       } else {
-        submit.last_update = new Date(submit.last_update).toISOString()
+        submit.start_time = new Date(submit.start_time).toISOString()
       }
 
       setSellData((prevState) => ({
         ...prevState,
-        client_email: submit.client_name,
         client_display_name: data.display_name,
+        client_email: submit.client_email,
         price: submit.price,
-        number_of_sessions: submit.number_of_sessions,
-        studio_name: submit.studio_name,
         description: submit.description,
-        last_update: submit.last_update,
+        start_time: submit.start_time,
+        scheduled_time: submit.scheduled_time
       }))
 
       return true

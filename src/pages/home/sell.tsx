@@ -12,21 +12,21 @@ function createSell() {
     const router = useRouter()
     const [page, setPage] = useState('createSell');
     const [sellData, setSellData] = useState({
-        client_email: "",
-        service_provider_name: "",
         client_display_name: "",
-        price: "",
-        number_of_sessions: "",
-        studio_name: "",
-        description: "",
+        client_email: "",
+        studio_id: "",
+        price: 0,
         start_time: "",
-        last_update: ""
+        actual_session: 0,
+        scheduled_time: "",
+        description: "",
+        finished: false
     })
 
     function createSell() {
         return (
             <FormSell setPage={setPage} setSellData={setSellData}>
-                <LinkText text='cancelar' handleOnChange={() => {router.push('/home')}}></LinkText>
+                <LinkText text='voltar' handleOnChange={() => {router.push('/home')}}></LinkText>
             </FormSell>
         )
     }
@@ -43,16 +43,14 @@ function createSell() {
             <CardBaseSmall>
                 <CardTitle text={"informações da venda"}/>
                 <div className="border-black border-2 rounded-lg px-4 py-2 px-4 my-4">
-                    <p>Data: {sellData.last_update}</p>
+                    <p>Data: {sellData.start_time}</p>
                     <p>Valor: R$ {sellData.price}</p>
-                    <p>Sessões: 1 de {sellData.number_of_sessions}</p>
                 </div>
 
                 <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Cliente</p>
                     <p>Nome: {sellData.client_display_name}</p>
                     <p>email: {sellData.client_email}</p>
-                    <p>+18</p>
                 </div>
 
                 {/* <div className="border-black border-2 rounded-lg px-4 py-2 my-4">

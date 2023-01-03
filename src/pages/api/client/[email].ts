@@ -2,7 +2,7 @@ async function getClientNameAPI(req, res) {
     const { email } = req.query
 
     const response = await fetch(process.env.NEXT_PUBLIC_API_ROUTE +
-                                 'client/name?email=' + email.toLowerCase(), {
+                                 'person/?email=' + email.toLowerCase(), {
         method: 'GET',
         headers: {
         "Content-Type": "application/json",

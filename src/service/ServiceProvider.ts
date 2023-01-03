@@ -1,11 +1,11 @@
-import {IPostProvider} from '../types/index'
 import { Store } from 'react-notifications-component';
 import { AuthService} from './AuthService'
 import nookies from 'nookies'
+import { ServiceProviderCreateFirebase } from '../types/ServiceProvider';
 
 export const ServiceProvider = {
 
-	createWithEmailAndPassword: async (data: IPostProvider) => {
+	createWithEmailAndPassword: async (data: ServiceProviderCreateFirebase) => {
         data.email = data.email.toLocaleLowerCase()
 
         try {

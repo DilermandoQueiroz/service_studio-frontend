@@ -12,7 +12,7 @@ export function CardBase({ children }) {
 
 export function CardBaseSmall({ children }) {
     return (
-        <div className='m-4 flex justify-center items-center'>
+        <div className='flex justify-center items-center'>
             <div className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4'>
                 {children}
             </div>             
@@ -48,12 +48,16 @@ function CardLinkName({ text }) {
 
 export function CardCreateClient() {
     return (
-        <CardLinkBase>
-            <div className="bg-red-500 rounded-lg block p-1 w-10">
-                <svg className="h-8 w-8 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="7" r="4" />  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+        <Link href="client/signup">
+            <div>
+                <CardLinkBase>
+                    <div className="bg-red-500 rounded-lg block p-1 w-10">
+                        <svg className="h-8 w-8 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="7" r="4" />  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+                    </div>
+                    <CardLinkName text="Cadastrar cliente "/>
+                </CardLinkBase>
             </div>
-            <CardLinkName text="Cadastrar cliente "/>
-        </CardLinkBase>
+        </Link>
     )
 }
 
@@ -83,7 +87,7 @@ export function CardHistory() {
                     <div className="bg-pink-500 rounded-lg block p-1 w-10">
                         <svg className="h-8 w-8 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="3" y1="21" x2="21" y2="21" />  <path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />  <path d="M5 21v-10.15" />  <path d="M19 21v-10.15" />  <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" /></svg>
                     </div>
-                    <CardLinkName text="Historico"/>
+                    <CardLinkName text="Histórico"/>
                 </CardLinkBase>
             </div>
         </Link>
@@ -105,4 +109,35 @@ export function CardClient() {
             </div>
         </Link>
     )
+}
+
+export function CardNextSell({props}) {
+    if (props.sells) {
+        return (
+            <div>
+                <CardBaseSmall>
+                    <div>
+                        Data: {props.sells.Sell.scheduled_time}
+                    </div>
+                    <div>
+                        Sessão: {props.sells.Sell.actual_session}
+                    </div>
+                    <div>
+                        Valor: R$ {props.sells.Sell.price}
+                    </div>
+                    <div>
+                        Estudio: sem estudio
+                    </div>
+                    <div>
+                        Cliente: {props.sells.display_name}
+                    </div>
+                </CardBaseSmall>
+                <CardBaseSmall>
+                    <div>
+                    {props.sells.Sell.description}
+                    </div>
+                </CardBaseSmall>
+            </div>
+        )
+    }
 }
