@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { sellDelete } from "../../service/Sell"
 
 export function TableClients({ props, children }) {
@@ -45,12 +46,16 @@ export function TableClients({ props, children }) {
 }
 
 export function TableSells({ props, children }) {
-  function remove(client) {
 
+  const [list, setList] = useState(props.sells);
+  
+  function remove(client) {
     const response = sellDelete(client.Sell.id)
     
     if (response) {
-      
+      const newList = list.filter((client_var) => client_var !== client);
+
+      setList(newList);
     }
   }
 
@@ -85,7 +90,7 @@ export function TableSells({ props, children }) {
               </thead>
               <tbody>
                     {
-                      props.sells.map((client) => (
+                      list.map((client) => (
                         <>
                               <tr className="bg-white border-b">
                                   <th scope="row" className="py-4 px-6">
