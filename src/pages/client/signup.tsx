@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { Button } from '../../components/button/Button';
 import { CardBaseSmall, CardTitle } from '../../components/card/CardBase';
@@ -7,12 +8,14 @@ import { TermsService } from '../../components/TermsService';
 import { withPublic } from '../../hook/route'
 
 const clientRegister = () => {
+    const router = useRouter()
     const [page, setPage] = useState("register");
 
     function register() {
         return (
             <FormCreateClient setPage={setPage}>
                 <LinkText handleOnChange={() => setPage('terms')} text='Clicando em “Cadastrar”, você está de acordo com os Termos de Serviço'></LinkText>
+                <LinkText handleOnChange={() => {router.push('/home')}} text="Voltar"/>
             </FormCreateClient>
         )
     }
@@ -21,7 +24,7 @@ const clientRegister = () => {
         return (
             <CardBaseSmall>
                 <CardTitle text={"Cadastro concluído"}/>
-                <Button text="Home" type="text" handleOnChange={() => setPage('register')} />
+                <Button text="Home" type="text" handleOnChange={() => {router.push('/home')}} />
             </CardBaseSmall>
         )
     }

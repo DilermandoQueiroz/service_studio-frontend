@@ -5,8 +5,9 @@
 import { withProtected } from "../../hook/route"
 import { getAllClientsData } from "../api/provider/clients";
 import nookies from 'nookies'
-import { GetServerSidePropsContext } from "next";
 import { TableClients } from "../../components/table/Table";
+import { useRouter } from "next/router";
+import { LinkText } from "../../components/LinkText";
 
 // export async function getServerSideProps(context) {
 //   try {
@@ -62,8 +63,13 @@ export async function getServerSideProps(context) {
 }
 
 function ClientsProvider(props) {
+  
+  const router = useRouter()
+
   return (
-    <TableClients props={props}/>
+    <TableClients props={props}>
+      <LinkText text='voltar' handleOnChange={() => {router.push('/home')}}></LinkText>
+    </TableClients>
   )
 }
 

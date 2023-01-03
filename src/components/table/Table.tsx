@@ -1,6 +1,9 @@
-export function TableClients({ props }) {
+import { sellDelete } from "../../service/Sell"
+
+export function TableClients({ props, children }) {
     return (
-        <div className="overflow-x-auto relative m-4 rounded-lg shadow-md">
+      <>
+        <div className="border-black border-2 overflow-x-auto relative m-4 rounded-lg shadow-md">
           <table className="w-full text-sm text-left text-black-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
@@ -10,12 +13,15 @@ export function TableClients({ props }) {
                   <th scope="col" className="py-3 px-6">
                       Email
                   </th>
+                  <th scope="col" className="py-3 px-6">
+                      Numero de telefone
+                  </th>
               </tr>
             </thead>
             <tbody>
                   {
                     props.clients.map((client) => (
-                        <>
+                      <>
                             <tr className="bg-white border-b">
                                 <th scope="row" className="py-4 px-6">
                                 {client.display_name}
@@ -23,6 +29,9 @@ export function TableClients({ props }) {
                                 <th className="py-4 px-6 ">
                                 {client.email}
                                 </th>
+                                <th className="py-4 px-6 ">
+                                {client.phone_number}
+                                </th>
                             </tr>
                         </>
                     ))
@@ -30,58 +39,89 @@ export function TableClients({ props }) {
             </tbody>
           </table>
         </div>
-      )
+        {children}
+      </>
+    )
 }
 
-export function TableSells({ props }) {
+export function TableSells({ props, children }) {
+  function remove(client) {
+
+    const response = sellDelete(client.Sell.id)
+    
+    if (response) {
+      
+    }
+  }
+
     return (
-        <div className="overflow-x-auto relative m-4 rounded-lg shadow-md">
-          <table className="w-full text-sm text-left text-black-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                  <th scope="col" className="py-3 px-6">
-                      Email do cliente
-                  </th>
-                  <th scope="col" className="py-3 px-6">
-                      Preço
-                  </th>
-                  <th scope="col" className="py-3 px-6">
-                      Numero de sessões
-                  </th>
-                  <th scope="col" className="py-3 px-6">
-                      Cadastro
-                  </th>
-                  <th scope="col" className="py-3 px-6">
-                      Próxima sessão
-                  </th>
-              </tr>
-            </thead>
-            <tbody>
-                  {
-                    props.sells.map((client) => (
+      <>
+        <div className="border-black border-2 overflow-x-auto relative m-4 rounded-lg shadow-md">
+            <table className="w-full text-sm text-left text-black-500">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" className="py-3 px-6">
+                        Email do cliente
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      Nome                     
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                        Preço
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                        Numero de sessões
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                        Cadastro
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                        Próxima sessão
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                        Finalizado
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                    {
+                      props.sells.map((client) => (
                         <>
-                            <tr className="bg-white border-b">
-                                <th scope="row" className="py-4 px-6">
-                                {client.client_name}
-                                </th>
-                                <th className="py-4 px-6 ">
-                                {client.price}
-                                </th>
-                                <th className="py-4 px-6 ">
-                                {client.number_of_sessions}
-                                </th>
-                                <th className="py-4 px-6 ">
-                                {client.start_time}
-                                </th>
-                                <th className="py-4 px-6 ">
-                                {client.last_update}
-                                </th>
-                            </tr>
-                        </>
-                    ))
-                  }
-            </tbody>
-          </table>
-        </div>
+                              <tr className="bg-white border-b">
+                                  <th scope="row" className="py-4 px-6">
+                                  {client.email}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                  {client.display_name}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {client.Sell.price}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {client.Sell.actual_session}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {client.Sell.start_time}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {client.Sell.scheduled_time}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                  {client.Sell.finished}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                    <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(client)}>
+                                      deletar
+                                    </div>
+                                  </th>
+                              </tr>
+                          </>
+                      ))
+                    }
+              </tbody>
+            </table>
+          </div>
+          {children}
+        </>
       )
 }

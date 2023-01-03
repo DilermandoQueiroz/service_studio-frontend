@@ -44,14 +44,14 @@ export function InputClientEmail({ register, errors }) {
     return (
         <div className="relative mb-6">
             <label>Email do cliente</label>
-            <input {...register("client_name",
+            <input {...register("client_email",
                 {
                     required: true,
                     validate: (value) => {
                         if (!isEmail(value)) return "Email inválido"
                     }
                 })} className='input' type="email"/>
-            <ErrorMessage errors={errors} name="client_name" />
+            <ErrorMessage errors={errors} name="client_email" />
         </div>
     )
 }
@@ -111,7 +111,7 @@ export function InputSchedulerDate({ errors, control }) {
             {
                 <Controller
                     control={control}
-                    name="last_update"
+                    name="scheduled_time"
                     rules={{
                         required: false,
                         validate: (value) => {
@@ -126,7 +126,7 @@ export function InputSchedulerDate({ errors, control }) {
                             dateFormat="dd/MM/yyyy" />
                     )} />
             }
-            <ErrorMessage errors={errors} name="last_update" />
+            <ErrorMessage errors={errors} name="scheduled_time" />
         </div>
     )
 }
@@ -162,11 +162,8 @@ export function InputPassword({ register, errors }) {
                     {
                         required: true,
                         minLength: {
-                            value: 8,
+                            value: 6,
                             message: "Senha curta"
-                        },
-                        validate: (value) => {
-                            if (!isStrongPassword(value)) return "Senha fraca"
                         }
                     })} className='input' id="password" type={passwordHidden ? "password" : "text"} />
             </div>

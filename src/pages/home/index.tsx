@@ -1,16 +1,28 @@
 import { withProtected } from "../../hook/route"
-import { CardBase, CardBaseSmall, CardClient, CardCreateClient, CardHistory, CardSell, CardTitle } from "../../components/card/CardBase"
+import { CardBase, CardClient, CardCreateClient, CardHistory, CardNextSell, CardSell, CardTitle } from "../../components/card/CardBase"
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import nookies from 'nookies'
+import { getNextSells } from "../api/provider/nextsells";
 
-function home() {
+
+export async function getServerSideProps(context) {
+    const token = nookies.get(context, "__session")
+    const response = await getNextSells(`Bearer ${token["__session"]}`)
+    const sells = await response.json()
+
+    return {
+      props: { sells }
+    }
+}
+
+function home(props) {
 
     const router = useRouter()
     const [page, setPage] = useState('home');
 
     return (
-        <>
+        <div>
             <CardBase>
                 <CardTitle text="Meu Trabalho"/>
                 <CardCreateClient />
@@ -19,12 +31,10 @@ function home() {
                 <CardClient />
             </CardBase>
             <CardBase>
-                <CardTitle text="Próximas tatuagens"/>
-                <div>
-                    Você verá em breve suas proximas tatuagens aqui, por enquanto você pode ver no historico
-                </div>
+                <CardTitle text="Próxima tatuagem"/>
+                <CardNextSell props={props}/>
             </CardBase>
-        </>
+        </div>
     ) 
 }
 

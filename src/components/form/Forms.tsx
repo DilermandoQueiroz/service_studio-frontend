@@ -9,6 +9,8 @@ import { sellConfirm } from '../../service/Sell';
 import { InputClientEmail, InputDate, InputDescription, InputDisplayName, InputPassword, InputPhoneNumber, InputPrice, InputSchedulerDate, InputEmail, InputSession, InputStudio, InputBirthDay } from './Input';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { ClientCreate } from '../../types/Client';
+import { SellCreate } from '../../types/Sell';
 
 export function FormTitle({ text }) {
     return (
@@ -129,7 +131,7 @@ export function FormResetPassword({ children, setPage }) {
 }
 
 export function FormSell({ children, setPage, setSellData }) {
-    const { register, handleSubmit, control, formState: { errors } } = useForm<IPostRegisterSell>();
+    const { register, handleSubmit, control, formState: { errors } } = useForm<SellCreate>();
     const [loading, setLoading] = useState(false)
     const [scheduler, setScheduler] = useState(false)
 
@@ -147,7 +149,7 @@ export function FormSell({ children, setPage, setSellData }) {
             <FormTitle text="Vender"/>
             <InputClientEmail register={register} errors={errors}/>
             <InputPrice register={register} errors={errors}/>
-            <InputSession register={register} errors={errors}/>
+            {/* <InputSession register={register} errors={errors}/> */}
             {/* <InputStudio register={register} errors={errors}/> */}
             <InputSchedulerDate errors={errors} control={control}/>
             {/* <InputDate register={register} errors={errors}/> */}
@@ -166,10 +168,11 @@ export function FormSell({ children, setPage, setSellData }) {
 }
 
 export function FormCreateClient({ children, setPage }) {
-    const { register, handleSubmit, control, formState: { errors } } = useForm<IPostClient>();
+    const { register, handleSubmit, control, formState: { errors } } = useForm<ClientCreate>();
     const [loading, setLoading] = useState(false)
 
-    const myOnSubmit: any = async (submit: IPostClient) => {
+    const myOnSubmit: any = async (submit: ClientCreate) => {
+        console.log(submit)
         try {
             setLoading(true)
             if (await Client.createClient(submit)) {
@@ -186,7 +189,6 @@ export function FormCreateClient({ children, setPage }) {
             <FormTitle text="Cliente"/>
             <InputEmail register={register} errors={errors} />
             <InputDisplayName register={register} errors={errors} />
-            <InputBirthDay control={control} errors={errors} />
             <InputPhoneNumber control={control} errors={errors} />
             <FormButton loading={loading} text='Cadastrar'/>
             {children}

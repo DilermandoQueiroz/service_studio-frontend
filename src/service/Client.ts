@@ -1,12 +1,10 @@
-import { IPostClient } from '../types/index'
 import { v4 as uuidv4 } from 'uuid';
 import { Store } from 'react-notifications-component';
+import { ClientCreate } from '../types/Client';
 
 export const Client = {
 
-    createClient: async (data: IPostClient) => {
-        data.name = uuidv4()
-        data.birth_date = new Date(data.birth_date).toISOString().split('T')[0]
+    createClient: async (data: ClientCreate) => {
         data.email = data.email.toLocaleLowerCase()
 
         try {

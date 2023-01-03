@@ -1,5 +1,5 @@
 async function createClientUsingAPI(req, res) {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_ROUTE + 'client/create', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_ROUTE + 'person/create', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
