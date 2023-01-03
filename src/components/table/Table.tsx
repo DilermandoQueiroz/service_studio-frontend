@@ -1,3 +1,5 @@
+import { sellDelete } from "../../service/Sell"
+
 export function TableClients({ props, children }) {
     return (
       <>
@@ -43,6 +45,15 @@ export function TableClients({ props, children }) {
 }
 
 export function TableSells({ props, children }) {
+  function remove(client) {
+
+    const response = sellDelete(client.Sell.id)
+    
+    if (response) {
+      
+    }
+  }
+
     return (
       <>
         <div className="border-black border-2 overflow-x-auto relative m-4 rounded-lg shadow-md">
@@ -97,6 +108,11 @@ export function TableSells({ props, children }) {
                                   </th>
                                   <th scope="row" className="py-4 px-6">
                                   {client.Sell.finished}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                    <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(client)}>
+                                      deletar
+                                    </div>
                                   </th>
                               </tr>
                           </>

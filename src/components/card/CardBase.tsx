@@ -140,4 +140,9 @@ export function CardNextSell({props}) {
             </div>
         )
     }
+    else {
+        return (
+            <>Você não tem próxima tatuagem!</>
+        )
+    }
 }

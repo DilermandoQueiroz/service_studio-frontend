@@ -120,3 +120,25 @@ export async function sellConfirm(submit, setSellData) {
   }
 
 }
+
+export async function sellDelete(sellID) {
+  try {
+    const response = await fetch('/api/sell/remove/' + sellID, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
+        "Access-Control-Allow-Origin": "*"
+      }
+    })
+    
+    if (response.ok) {
+      return true
+    }
+    
+    return false
+  }
+  catch (error) {
+    console.log(error)
+  }
+}
