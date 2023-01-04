@@ -106,15 +106,13 @@ export function TableSells({ props, children }) {
                                   {client.Sell.actual_session}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                  {new Date(client.Sell.start_time).toLocaleDateString() 
-                                  + " " + new Date(client.Sell.start_time).toLocaleTimeString()}
+                                  {new Date(client.Sell.start_time).toLocaleString()}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                  {new Date(client.Sell.scheduled_time).toLocaleDateString()
-                                   + " " + new Date(client.Sell.scheduled_time).toLocaleTimeString()}
+                                  {new Date(client.Sell.scheduled_time).toLocaleString()}
                                   </th>
                                   <th scope="row" className="py-4 px-6">
-                                  {client.Sell.finished}
+                                  {client.Sell.finished ? "finalizado" : <p className="text-green-500">em aberto</p>}
                                   </th>
                                   <th scope="row" className="py-4 px-6">
                                     <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(client)}>

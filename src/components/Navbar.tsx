@@ -68,7 +68,7 @@ const Navbar = () => {
             <div className='ml-2.5 items-start flex flex-col'>
               <Link href='/client/signup'>
                 <a onClick={handleClick} className='w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                  ** cliente
+                  ** Cliente
                 </a>
               </Link>
             </div>
@@ -104,21 +104,21 @@ const Navbar = () => {
               <div>
                 <Link href='/home/sell'>
                   <a onClick={handleClick} className='mt-2 button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                    ** registrar
+                    ** Registrar
                   </a>
                 </Link>
               </div>
               <div>
-                <Link href='/sell'>
+                <Link href='home/history'>
                   <a onClick={handleClick} className='button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                    ** historico
+                    ** Histórico
                   </a>
                 </Link>
               </div>
               <div>
-                <Link href='/serviceprovider/clients'>
+                <Link href='/home/clients'>
                   <a onClick={handleClick} className='button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                    ** clientes
+                    ** Clientes
                   </a>
                 </Link>
               </div>
