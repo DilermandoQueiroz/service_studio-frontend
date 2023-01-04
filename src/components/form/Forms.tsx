@@ -186,3 +186,25 @@ export function FormCreateClient({ children, setPage }) {
     )
 }
 
+export function FormConnectStudio({ children }) {
+    const router = useRouter()
+    const { handleSubmit, register, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false)
+
+    const myOnSubmit: any = async (submit) => {
+        setLoading(true)
+        const data = {
+            email: submit.email,
+        }
+        setLoading(false)
+    }
+
+    return (
+        <Form onSubmit={handleSubmit(myOnSubmit)}>
+            <FormTitle text='Solicitar Estúdio'/>
+            <InputEmail register={register} errors={errors}/>
+            <FormButton text='Solicitar' loading={loading}/>
+            {children}
+        </Form>
+    )
+}

@@ -72,19 +72,19 @@ export function TableSells({ props, children }) {
                       Nome                     
                     </th>
                     <th scope="col" className="py-3 px-6">
-                        Preço
+                      Preço
                     </th>
                     <th scope="col" className="py-3 px-6">
-                        Numero de sessões
+                      Numero de sessões
                     </th>
                     <th scope="col" className="py-3 px-6">
-                        Cadastro
+                      Cadastro
                     </th>
                     <th scope="col" className="py-3 px-6">
-                        Próxima sessão
+                      Próxima sessão
                     </th>
                     <th scope="col" className="py-3 px-6">
-                        Finalizado
+                      Finalizado
                     </th>
                 </tr>
               </thead>
@@ -124,6 +124,83 @@ export function TableSells({ props, children }) {
                       ))
                     }
               </tbody>
+            </table>
+          </div>
+          {children}
+        </>
+      )
+}
+
+export function TableStudio({ props, children }) {
+
+  // const [list, setList] = useState(props.sells);
+  
+  // function remove(client) {
+  //   const response = sellDelete(client.Sell.id)
+    
+  //   if (response) {
+  //     const newList = list.filter((client_var) => client_var !== client);
+
+  //     setList(newList);
+  //   }
+  // }
+
+    return (
+      <>
+        <div className="border-black border-2 overflow-x-auto relative m-4 rounded-lg shadow-md">
+            <table className="w-full text-sm text-left text-black-500">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" className="py-3 px-6">
+                      Nome                     
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      Email
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      Situação
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      Deletar
+                    </th>
+                </tr>
+              </thead>
+              {/* <tbody>
+                    {
+                      list.map((client) => (
+                        <>
+                              <tr className="bg-white border-b">
+                                  <th scope="row" className="py-4 px-6">
+                                  {client.email}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                  {client.display_name}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {client.Sell.price}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {client.Sell.actual_session}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {new Date(client.Sell.start_time).toLocaleString()}
+                                  </th>
+                                  <th className="py-4 px-6 ">
+                                  {new Date(client.Sell.scheduled_time).toLocaleString()}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                  {client.Sell.finished ? "finalizado" : <p className="text-green-500">em aberto</p>}
+                                  </th>
+                                  <th scope="row" className="py-4 px-6">
+                                    <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(client)}>
+                                      deletar
+                                    </div>
+                                  </th>
+                              </tr>
+                          </>
+                      ))
+                    }
+              </tbody> */}
             </table>
           </div>
           {children}

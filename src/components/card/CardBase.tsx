@@ -84,8 +84,8 @@ export function CardHistory() {
         <Link href="/home/history">
             <div>
                 <CardLinkBase>
-                    <div className="bg-pink-500 rounded-lg block p-1 w-10">
-                        <svg className="h-8 w-8 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="3" y1="21" x2="21" y2="21" />  <path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />  <path d="M5 21v-10.15" />  <path d="M19 21v-10.15" />  <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" /></svg>
+                    <div className="bg-yellow-300 rounded-lg block p-1 w-10">
+                        <svg className="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"></path></g></svg>
                     </div>
                     <CardLinkName text="Histórico"/>
                 </CardLinkBase>
@@ -105,6 +105,21 @@ export function CardClient() {
                         </svg>
                     </div>
                     <CardLinkName text="Clientes"/>
+                </CardLinkBase>
+            </div>
+        </Link>
+    )
+}
+
+export function CardStudio() {
+    return (
+        <Link href="/home/studio">
+            <div>
+                <CardLinkBase>
+                    <div className="bg-pink-500 rounded-lg block p-1 w-10">
+                        <svg className="h-8 w-8 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="3" y1="21" x2="21" y2="21" />  <path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />  <path d="M5 21v-10.15" />  <path d="M19 21v-10.15" />  <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" /></svg>
+                    </div>
+                    <CardLinkName text="Estúdios"/>
                 </CardLinkBase>
             </div>
         </Link>

@@ -1,5 +1,5 @@
 import { withProtected } from "../../hook/route"
-import { CardBase, CardClient, CardCreateClient, CardHistory, CardNextSell, CardSell, CardTitle } from "../../components/card/CardBase"
+import { CardBase, CardClient, CardCreateClient, CardHistory, CardNextSell, CardSell, CardStudio, CardTitle } from "../../components/card/CardBase"
 import { useState } from "react";
 import { useRouter } from "next/router";
 import nookies from 'nookies'
@@ -29,6 +29,7 @@ function home(props) {
                 <CardSell/>
                 <CardHistory/>
                 <CardClient />
+                <CardStudio />
             </CardBase>
             <CardBase>
                 <CardTitle text="Próxima tatuagem"/>
