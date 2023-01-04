@@ -149,18 +149,8 @@ export function FormSell({ children, setPage, setSellData }) {
             <FormTitle text="Vender"/>
             <InputClientEmail register={register} errors={errors}/>
             <InputPrice register={register} errors={errors}/>
-            {/* <InputSession register={register} errors={errors}/> */}
-            {/* <InputStudio register={register} errors={errors}/> */}
             <InputSchedulerDate errors={errors} control={control}/>
-            {/* <InputDate register={register} errors={errors}/> */}
             <InputDescription register={register} errors={errors}/>
-            
-            {/* <div className="relative mb-6">
-                <input type='checkbox' onClick={() => {setScheduler(!scheduler)}}></input>
-                <label className='ml-2'>Agendar sessão</label>
-            </div> */}
-            
-            {/* {scheduler ? <InputSchedulerDate errors={errors} control={control}/> : null} */}
             <FormButton loading={loading} text='Próximo'/>
             {children}
         </Form>

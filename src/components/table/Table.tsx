@@ -106,10 +106,12 @@ export function TableSells({ props, children }) {
                                   {client.Sell.actual_session}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                  {client.Sell.start_time}
+                                  {new Date(client.Sell.start_time).toLocaleDateString() 
+                                  + " " + new Date(client.Sell.start_time).toLocaleTimeString()}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                  {client.Sell.scheduled_time}
+                                  {new Date(client.Sell.scheduled_time).toLocaleDateString()
+                                   + " " + new Date(client.Sell.scheduled_time).toLocaleTimeString()}
                                   </th>
                                   <th scope="row" className="py-4 px-6">
                                   {client.Sell.finished}

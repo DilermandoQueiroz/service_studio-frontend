@@ -115,15 +115,16 @@ export function InputSchedulerDate({ errors, control }) {
                     rules={{
                         required: false,
                         validate: (value) => {
-                            if (differenceInDays(new Date(), new Date(value)) > 0) return "Não pode marcar uma data anterior a atual"
+                            if (differenceInHours(new Date(), new Date(value)) > 0) return "Não pode escolher uma data anterior a atual"
                         }
                     }}
                     render={({ field }) => (
                         <DatePicker
                             className='input'
                             selected={field.value}
+                            showTimeSelect
                             onChange={(date) => field.onChange(date)}
-                            dateFormat="dd/MM/yyyy" />
+                            dateFormat="dd/MM/yyyy h:mm aa" />
                     )} />
             }
             <ErrorMessage errors={errors} name="scheduled_time" />

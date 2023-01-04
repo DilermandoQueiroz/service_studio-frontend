@@ -117,16 +117,16 @@ export function CardNextSell({props}) {
             <div>
                 <CardBaseSmall>
                     <div>
-                        Data: {props.sells.Sell.scheduled_time}
+                        Data: {new Date(props.sells.Sell.scheduled_time).toLocaleString()}
                     </div>
                     <div>
                         Sessão: {props.sells.Sell.actual_session}
                     </div>
                     <div>
-                        Valor: R$ {props.sells.Sell.price}
+                        Valor: {(props.sells.Sell.price).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}
                     </div>
                     <div>
-                        Estudio: sem estudio
+                        Estúdio: Sem estúdio
                     </div>
                     <div>
                         Cliente: {props.sells.display_name}
@@ -134,7 +134,7 @@ export function CardNextSell({props}) {
                 </CardBaseSmall>
                 <CardBaseSmall>
                     <div>
-                    {props.sells.Sell.description}
+                    {props.sells.Sell.description ? props.sells.Sell.description : "Sem descrição"}
                     </div>
                 </CardBaseSmall>
             </div>

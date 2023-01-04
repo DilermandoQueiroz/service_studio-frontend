@@ -15,7 +15,7 @@ export async function createSellDb(data) {
   }
   dataCreateSell.start_time = new Date().toISOString()
   dataCreateSell.price = parseFloat(Math.ceil(data.price).toFixed(1))
-  console.log(dataCreateSell)
+  
   try {
     const response = await fetch('/api/sell/create', {
       method: 'POST',

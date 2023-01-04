@@ -43,7 +43,8 @@ function createSell() {
             <CardBaseSmall>
                 <CardTitle text={"informações da venda"}/>
                 <div className="border-black border-2 rounded-lg px-4 py-2 px-4 my-4">
-                    <p>Data: {sellData.start_time}</p>
+                    <p>Data: {new Date(sellData.start_time).toLocaleString()}</p>
+                    <p>Agendamento: {sellData.scheduled_time ? new Date(sellData.scheduled_time).toLocaleString() : "sem agendamento"}</p>
                     <p>Valor: R$ {sellData.price}</p>
                 </div>
 
@@ -63,14 +64,14 @@ function createSell() {
 
                 <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Descrição</p>
-                    <p>{sellData.description}</p>
+                    <p>{sellData.description ? sellData.description : "Sem descrição"}</p>
                 </div>
 
                 <div className="border-black border-2 rounded-lg px-4 py-2 my-4">
                     <p className="text-xl font-semibold">Resumo</p>
-                    <p>Valor: R$ {sellData.price}</p>
-                    <p>Taxa: R$ 0,00</p>
-                    <p>Total: R$ {sellData.price} </p>
+                    <p>Valor: R$ {(sellData.price).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+                    <p>Taxa: {(0).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} </p>
+                    <p>Total: R$ {(sellData.price).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})} </p>
                 </div>
                 <Button text="Concluir venda" type="text" handleOnChange={submitSell} />
                 <LinkText text='voltar' handleOnChange={() => setPage('createSell')} />
