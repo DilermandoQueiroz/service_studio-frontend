@@ -5,16 +5,18 @@ import {setCookie} from 'nookies'
 import useAuth from "../hook/auth";
 
 export default function AuthStateChanged({ children }) {
-	const { setUser } = useAuth();
+	const { setUser, setStudio } = useAuth();
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		onAuthStateChanged(getAuth(), (user) => {
+		onAuthStateChanged(getAuth(), async (user) => {
 			if(user) {
 				user.getIdToken()
 				.then((token) => {
 					setCookie(children, '__session', token, {domain: window.location.hostname, path: '/', sameSite: "Strict"})
 				}) 
+				const idTokenResult = await user.getIdTokenResult()
+				setStudio(idTokenResult.claims.studio_id)
 				setUser(user);
 			}
 			setLoading(false);

@@ -10,6 +10,7 @@ export default function useAuth() {
 
 export function AuthProvider(props) {
 	const [user, setUser] = useState(null);
+	const [studio, setStudio] = useState(null);
 	const [error, setError] = useState({
 		pathname: '',
 		error: ''
@@ -121,17 +122,25 @@ export function AuthProvider(props) {
 		}
 	};
 
+	const isOwnerStudio = async () => {
+		const studio = await AuthService.isOwnerStudio();
+		
+	};
+
 	const value = {
 		user,
+		studio,
 		error,
 		loginWithGoogle,
 		logout,
 		setUser,
+		setStudio,
 		createUserWithEmailAndPassword,
 		signInUserWithEmailAndPassword,
 		resetPassword,
 		deleteAccount,
 		updatePassword,
+		isOwnerStudio
 	};
 
 	return <authContext.Provider value={value} {...props} />;

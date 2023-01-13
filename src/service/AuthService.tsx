@@ -110,6 +110,18 @@ export const AuthService = {
 		} catch (e) {
 			return e.message
 		}
-
+	},
+	isOwnerStudio: async () => {
+		try{
+			const idTokenResult = await getAuth().currentUser.getIdTokenResult()
+			
+			if (idTokenResult.claims.studio_id) {
+				return true
+			}
+	
+			return false
+		} catch (e) {
+			return e.message
+		}
 	}
 };

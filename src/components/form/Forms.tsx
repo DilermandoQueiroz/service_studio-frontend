@@ -11,6 +11,9 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { ClientCreate } from '../../types/Client';
 import { SellCreate } from '../../types/Sell';
+import { AuthService } from '../../service/AuthService';
+import { Studio } from '../../service/Studio';
+import { Connect } from '../../service/LinkStudioServiceProvider';
 
 export function FormTitle({ text }) {
     return (
@@ -91,8 +94,11 @@ export function FormCreateServiceProvider({ children }) {
             display_name: submit.display_name
         }
 
-        ServiceProvider.createWithEmailAndPassword(data)
-
+        const response = await ServiceProvider.createWithEmailAndPassword(data)
+        
+        if (response) {
+            router.push("/home")
+        } 
         setLoading(false)
     }
 
@@ -194,14 +200,73 @@ export function FormConnectStudio({ children }) {
     const myOnSubmit: any = async (submit) => {
         setLoading(true)
         const data = {
-            email: submit.email,
+            email_studio: submit.email,
         }
+        Connect.serviceProvider(data)
         setLoading(false)
     }
 
     return (
         <Form onSubmit={handleSubmit(myOnSubmit)}>
             <FormTitle text='Solicitar Estúdio'/>
+            <InputEmail register={register} errors={errors}/>
+            <FormButton text='Solicitar' loading={loading}/>
+            {children}
+        </Form>
+    )
+}
+
+export function FormCreateStudio({ children }) {
+    const router = useRouter()
+    const { handleSubmit, register, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false)
+
+    const myOnSubmit: any = async (submit) => {
+        setLoading(true)
+        const isOwner = await AuthService.isOwnerStudio()
+        console.log(isOwner)
+        if (isOwner) {
+            router.push("/studio")
+        } else {
+            const data = {
+                email_studio: submit.email,
+                display_name: submit.display_name
+            }
+            Studio.createStudio(data)
+            router.push("/studio")
+        }
+        
+        setLoading(false)
+    }
+
+    return (
+        <Form onSubmit={handleSubmit(myOnSubmit)}>
+            <FormTitle text='Criar estúdio'/>
+            <InputEmail register={register} errors={errors}/>
+            <InputDisplayName register={register} errors={errors}/>
+            <FormButton text='Criar' loading={loading}/>
+            {children}
+        </Form>
+    )
+}
+
+export function FormConnectServiceProvider({ children }) {
+
+    const { handleSubmit, register, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false)
+
+    const myOnSubmit: any = async (submit) => {
+        setLoading(true)
+        const data = {
+            email_service_provider: submit.email,
+        }
+        Connect.studio(data)
+        setLoading(false)
+    }
+
+    return (
+        <Form onSubmit={handleSubmit(myOnSubmit)}>
+            <FormTitle text='Solicitar tatuador'/>
             <InputEmail register={register} errors={errors}/>
             <FormButton text='Solicitar' loading={loading}/>
             {children}

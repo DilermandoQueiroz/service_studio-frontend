@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sellDelete } from "../../service/Sell"
+import { Connect } from "../../service/LinkStudioServiceProvider"
 
 export function TableClients({ props, children }) {
     return (
@@ -133,17 +134,87 @@ export function TableSells({ props, children }) {
 
 export function TableStudio({ props, children }) {
 
-  // const [list, setList] = useState(props.sells);
-  
-  // function remove(client) {
-  //   const response = sellDelete(client.Sell.id)
-    
-  //   if (response) {
-  //     const newList = list.filter((client_var) => client_var !== client);
+  const [list, setList] = useState(props.studios);
 
-  //     setList(newList);
-  //   }
-  // }
+  function remove(item) {
+    const response = Connect.delete(item.StudioServiceProvider.id)
+    
+    if (response) {
+      const newList = list.filter((item_var) => item_var !== item);
+
+      setList(newList);
+    }
+  }
+
+  return (
+    <>
+      <div className="border-black border-2 overflow-x-auto relative m-4 rounded-lg shadow-md">
+          <table className="w-full text-sm text-left text-black-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                  <th scope="col" className="py-3 px-6">
+                    Nome                     
+                  </th>
+                  <th scope="col" className="py-3 px-6">
+                    Email
+                  </th>
+                  <th scope="col" className="py-3 px-6">
+                    Pedido
+                  </th>
+                  <th scope="col" className="py-3 px-6">
+                    Deletar
+                  </th>
+              </tr>
+            </thead>
+            <tbody>
+                  {
+                    list.map((studio) => (
+                      <>
+                            <tr className="bg-white border-b">
+                                <th scope="row" className="py-4 px-6">
+                                  {studio.Studio.display_name}
+                                </th>
+                                <th scope="row" className="py-4 px-6">
+                                  {studio.Studio.email_studio}
+                                </th>
+                                <th className="py-4 px-6 ">
+                                  {studio.StudioServiceProvider.studio_accept ? <p className="text-green-500">aceitado</p>: <p className="text-red-500">em aberto</p>}
+                                </th>
+                                <th scope="row" className="py-4 px-6">
+                                  <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(studio)}>
+                                    deletar
+                                  </div>
+                                </th>
+                            </tr>
+                        </>
+                    ))
+                  }
+            </tbody>
+          </table>
+        </div>
+        {children}
+      </>
+    )
+}
+
+export function TableServiceProvider({ props, children }) {
+
+  const [list, setList] = useState(props.serviceProvider);
+  
+  function remove(item) {
+    const response = Connect.delete(item.StudioServiceProvider.id)
+    
+    if (response) {
+      const newList = list.filter((item_var) => item_var !== item);
+
+      setList(newList);
+    }
+  }
+
+  function accept(item) {
+    const response = Connect.update(item.StudioServiceProvider.id)
+
+  }
 
     return (
       <>
@@ -158,41 +229,35 @@ export function TableStudio({ props, children }) {
                       Email
                     </th>
                     <th scope="col" className="py-3 px-6">
-                      Situação
+                      Situação tatuador
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      Situação estudio
                     </th>
                     <th scope="col" className="py-3 px-6">
                       Deletar
                     </th>
                 </tr>
               </thead>
-              {/* <tbody>
+              <tbody>
                     {
-                      list.map((client) => (
+                      list.map((connect) => (
                         <>
                               <tr className="bg-white border-b">
                                   <th scope="row" className="py-4 px-6">
-                                  {client.email}
+                                    {connect.Person.display_name}
                                   </th>
                                   <th scope="row" className="py-4 px-6">
-                                  {client.display_name}
+                                    {connect.Person.email}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                  {client.Sell.price}
+                                    {connect.StudioServiceProvider.service_provider_accept ? <p className="text-green-500">Aceitado</p> : <p className="text-red-500">em aberto</p>}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                  {client.Sell.actual_session}
-                                  </th>
-                                  <th className="py-4 px-6 ">
-                                  {new Date(client.Sell.start_time).toLocaleString()}
-                                  </th>
-                                  <th className="py-4 px-6 ">
-                                  {new Date(client.Sell.scheduled_time).toLocaleString()}
+                                    {connect.StudioServiceProvider.studio_accept ? <p className="text-green-500">Aceitado</p> : <div className="text-green-500 button-movement cursor-pointer" onClick={() => accept(connect)}>Aceitar</div>}
                                   </th>
                                   <th scope="row" className="py-4 px-6">
-                                  {client.Sell.finished ? "finalizado" : <p className="text-green-500">em aberto</p>}
-                                  </th>
-                                  <th scope="row" className="py-4 px-6">
-                                    <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(client)}>
+                                    <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(connect)}>
                                       deletar
                                     </div>
                                   </th>
@@ -200,7 +265,7 @@ export function TableStudio({ props, children }) {
                           </>
                       ))
                     }
-              </tbody> */}
+              </tbody>
             </table>
           </div>
           {children}

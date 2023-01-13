@@ -1,6 +1,5 @@
 import { Store } from 'react-notifications-component';
 import { AuthService} from './AuthService'
-import nookies from 'nookies'
 import { ServiceProviderCreateFirebase } from '../types/ServiceProvider';
 
 export const ServiceProvider = {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Home } from '../components/home'
-import { withPublic } from '../hook/route'
+import { withPublicHome } from '../hook/route'
 
 const serviceProviders = () => {
 
@@ -12,4 +12,4 @@ const serviceProviders = () => {
 }
 
 
-export default withPublic(serviceProviders)
+export default withPublicHome(serviceProviders)

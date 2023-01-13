@@ -71,19 +71,13 @@ const Navbar = () => {
                   ** Cliente
                 </a>
               </Link>
-            </div>
-          }
-          {/* {
-            !user &&
-            <div className='ml-2.5  lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
-              <Link href='/register/studio'>
-                <a onClick={handleClick} className='w-full px-3 py-2 rounded font-bold items-center justify-center'>
-                  ** estudio
+              <Link href='/studio/create'>
+                <a onClick={handleClick} className='button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                  ** Estúdio
                 </a>
               </Link>
             </div>
-          } */}
-
+          }
         </div>
       </>
     )
@@ -133,14 +127,17 @@ const Navbar = () => {
   const privado = () => {
     return (
       <>
-        <Link href='/'>
+        <Link href='/home'>
           <a onClick={handleClick} className='button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
-            Perfil
+            Tatuador
           </a>
         </Link>
-        <a onClick={deleteAccount} className='cursor-pointer button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
-          Excluir
-        </a>
+        <Link href='/studio'>
+          <a onClick={handleClick} className='button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
+            Estúdio
+          </a>
+        </Link>
+        
       </>
     )
   }
