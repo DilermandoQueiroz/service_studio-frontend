@@ -4,7 +4,7 @@ import { SellCreate } from '../types/Sell';
 
 export async function createSellDb(data) {
   const dataCreateSell: SellCreate = {
-    studio_id: null,
+    studio_email: data.studio_email,
     client_email: data.client_email,
     actual_session: 1,
     price: data.price,
@@ -89,6 +89,7 @@ export async function sellConfirm(submit, setSellData) {
 
       setSellData((prevState) => ({
         ...prevState,
+        studio_email: submit.studio_email,
         client_display_name: data.display_name,
         client_email: submit.client_email,
         price: submit.price,

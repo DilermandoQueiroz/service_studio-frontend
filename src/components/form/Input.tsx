@@ -3,23 +3,42 @@ import { useState } from 'react';
 import { Controller } from "react-hook-form";
 import isEmail from 'validator/lib/isEmail';
 import DatePicker from "react-datepicker";
-import isStrongPassword from 'validator/lib/isStrongPassword'
 import { differenceInDays, differenceInHours, differenceInYears } from 'date-fns';
 import PhoneInput from 'react-phone-number-input'
 import { cpf } from 'cpf-cnpj-validator';
+
+
+export function InputStudioConnect({ register, errors }) {
+    return (
+        <div className="relative mb-6">
+            <label>Estudio (Opcional)</label>
+                <select {...register("studio_name",
+                    {
+                        required: false,
+                        validate: (value) => {
+                            if (value.length > 36 || value.length < 0) return "Valor inválido"
+                        }
+                    })} className='input' type="text">
+                        <option value="volvo">Volvo</option>
+                </select>
+                
+            <ErrorMessage errors={errors} name="studio_name" />
+        </div>
+    )
+}
 
 export function InputStudio({ register, errors }) {
     return (
         <div className="relative mb-6">
             <label>Estudio (Opcional)</label>
-            <input {...register("studio_name",
+            <input {...register("studio_email",
                 {
                     required: false,
                     validate: (value) => {
                         if (value.length > 36 || value.length < 0) return "Valor inválido"
                     }
                 })} className='input' type="text" />
-            <ErrorMessage errors={errors} name="studio_name" />
+            <ErrorMessage errors={errors} name="studio_email" />
         </div>
     )
 }

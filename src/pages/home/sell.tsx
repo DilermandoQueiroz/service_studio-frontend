@@ -14,7 +14,7 @@ function createSell() {
     const [sellData, setSellData] = useState({
         client_display_name: "",
         client_email: "",
-        studio_id: "",
+        studio_email: "",
         price: 0,
         start_time: "",
         actual_session: 0,

@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-phone-number-input/style.css'
 import { ServiceProvider } from '../../service/ServiceProvider'
 import { sellConfirm } from '../../service/Sell';
-import { InputClientEmail, InputDate, InputDescription, InputDisplayName, InputPassword, InputPhoneNumber, InputPrice, InputSchedulerDate, InputEmail, InputSession, InputStudio, InputBirthDay } from './Input';
+import { InputClientEmail, InputDate, InputDescription, InputDisplayName, InputPassword, InputPhoneNumber, InputPrice, InputSchedulerDate, InputEmail, InputSession, InputStudio, InputBirthDay, InputStudioConnect } from './Input';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { ClientCreate } from '../../types/Client';
@@ -145,6 +145,7 @@ export function FormSell({ children, setPage, setSellData }) {
 
     const myOnSubmit: any = async (submit) => {
         setLoading(true)
+        
         const response = await sellConfirm(submit, setSellData)
         if (response) {
             setPage("confirmSell")
@@ -157,6 +158,7 @@ export function FormSell({ children, setPage, setSellData }) {
             <FormTitle text="Vender"/>
             <InputClientEmail register={register} errors={errors}/>
             <InputPrice register={register} errors={errors}/>
+            <InputStudio register={register} errors={errors}/>
             <InputSchedulerDate errors={errors} control={control}/>
             <InputDescription register={register} errors={errors}/>
             <FormButton loading={loading} text='Próximo'/>
