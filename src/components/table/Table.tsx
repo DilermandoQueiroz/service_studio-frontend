@@ -159,7 +159,7 @@ export function TableStudio({ props, children }) {
                     Email
                   </th>
                   <th scope="col" className="py-3 px-6">
-                    Pedido
+                    Situação
                   </th>
                   <th scope="col" className="py-3 px-6">
                     Deletar
@@ -178,7 +178,11 @@ export function TableStudio({ props, children }) {
                                   {studio.Studio.email_studio}
                                 </th>
                                 <th className="py-4 px-6 ">
-                                  {studio.StudioServiceProvider.studio_accept ? <p className="text-green-500">aceitado</p>: <p className="text-red-500">em aberto</p>}
+                                  {studio.StudioServiceProvider.studio_accept ?
+                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 stroke-green-500">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                   </svg> :
+                                   <p className="text-red-500">em aberto</p>}
                                 </th>
                                 <th scope="row" className="py-4 px-6">
                                   <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(studio)}>
@@ -251,10 +255,19 @@ export function TableServiceProvider({ props, children }) {
                                     {connect.Person.email}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                    {connect.StudioServiceProvider.service_provider_accept ? <p className="text-green-500">Aceitado</p> : <p className="text-red-500">em aberto</p>}
+                                    {connect.StudioServiceProvider.service_provider_accept ? 
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 stroke-green-500">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                      </svg> :
+                              
+                                      <p className="text-red-500">em aberto</p>}
                                   </th>
                                   <th className="py-4 px-6 ">
-                                    {connect.StudioServiceProvider.studio_accept ? <p className="text-green-500">Aceitado</p> : <div className="text-green-500 button-movement cursor-pointer" onClick={() => accept(connect)}>Aceitar</div>}
+                                    {connect.StudioServiceProvider.studio_accept ? 
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 stroke-green-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                    </svg> :
+                                    <div className="text-green-500 button-movement cursor-pointer" onClick={() => accept(connect)}>Aceitar</div>}
                                   </th>
                                   <th scope="row" className="py-4 px-6">
                                     <div className="cursor-pointer button-movement text-red-500" onClick={() => remove(connect)}>

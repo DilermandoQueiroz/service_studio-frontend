@@ -32,7 +32,7 @@ function Studio(props) {
             </CardBase>
             <TableServiceProvider props={props}>
             </TableServiceProvider>
-            <LinkText text='voltar' handleOnChange={() => {router.push('/home')}}></LinkText>
+            <LinkText text='voltar' handleOnChange={() => {router.push('/studio')}}></LinkText>
         </>
     )
 }
