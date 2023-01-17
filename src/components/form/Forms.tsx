@@ -88,6 +88,7 @@ export function FormCreateServiceProvider({ children }) {
 
     const myOnSubmit: any = async (submit) => {
         setLoading(true)
+
         const data = {
             email: submit.email,
             password: submit.password,
@@ -95,10 +96,11 @@ export function FormCreateServiceProvider({ children }) {
         }
 
         const response = await ServiceProvider.createWithEmailAndPassword(data)
-        
+
         if (response) {
-            router.push("/home")
-        } 
+            await ServiceProvider.loginWithEmailAndPassword(data.email, data.password)
+            router.push("/verifyemail")
+        }
         setLoading(false)
     }
 

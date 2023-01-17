@@ -29,10 +29,9 @@ export const ServiceProvider = {
                     }
                 },
             )
-
+            
             if (response.ok) {
-                return ServiceProvider.loginWithEmailAndPassword(data.email, data.password)
-                
+                return true
             } 
 
             return false

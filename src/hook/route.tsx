@@ -57,8 +57,10 @@ export function verifyemail(Component) {
 		const router = useRouter();
 		const pathname = router.pathname;
 
-		if (auth.user.emailVerified) {
-			router.replace("/home")
+		if (auth.user) {
+			if (auth.user.emailVerified) {
+				router.replace("/home")
+			}
 		}
 
 		return <Component auth={auth} pathname={pathname} {...props} />;

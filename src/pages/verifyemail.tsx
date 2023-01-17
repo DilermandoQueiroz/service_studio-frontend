@@ -15,4 +15,4 @@ const serviceProviders = () => {
 }
 
 
-export default withProtected(serviceProviders)
+export default verifyemail(serviceProviders)
