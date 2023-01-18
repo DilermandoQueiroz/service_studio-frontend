@@ -18,7 +18,6 @@ export async function getServerSideProps(context) {
 
 function SalesHistory(props) {
     const router = useRouter()
-    console.log(props)
     return (
         <TableSells props={props}>
             <LinkText text='voltar' handleOnChange={() => {router.push('/studio')}}></LinkText>
