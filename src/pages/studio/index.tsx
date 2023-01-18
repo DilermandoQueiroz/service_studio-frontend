@@ -8,7 +8,7 @@ function home() {
             <CardBase>
                 <CardTitle text="Meu Estúdio"/>
                 <CardServiceProvider />
-                <CardHistory/>
+                <CardHistory link="/studio/history"/>
                 <CardClient />
             </CardBase>
         </div>

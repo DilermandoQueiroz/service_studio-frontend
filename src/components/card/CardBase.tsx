@@ -94,9 +94,9 @@ export function CardSell() {
     )
 }
 
-export function CardHistory() {
+export function CardHistory({ link }) {
     return (
-        <Link href="/home/history">
+        <Link href={link}>
             <div>
                 <CardLinkBase>
                     <div className="bg-yellow-300 rounded-lg block p-1 w-10">

@@ -27,7 +27,7 @@ function home(props) {
                 <CardTitle text="Meu Trabalho"/>
                 <CardCreateClient />
                 <CardSell/>
-                <CardHistory/>
+                <CardHistory link={"/home/history"}/>
                 <CardClient />
                 <CardStudio />
             </CardBase>
