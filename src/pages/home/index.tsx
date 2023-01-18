@@ -28,7 +28,7 @@ function home(props) {
                 <CardCreateClient />
                 <CardSell/>
                 <CardHistory link={"/home/history"}/>
-                <CardClient />
+                <CardClient link={"/home/clients"}/>
                 <CardStudio />
             </CardBase>
             <CardBase>

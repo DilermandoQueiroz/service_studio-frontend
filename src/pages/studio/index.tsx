@@ -9,7 +9,7 @@ function home() {
                 <CardTitle text="Meu Estúdio"/>
                 <CardServiceProvider />
                 <CardHistory link="/studio/history"/>
-                <CardClient />
+                <CardClient link="/studio/clients"/>
             </CardBase>
         </div>
     )

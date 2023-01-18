@@ -109,9 +109,9 @@ export function CardHistory({ link }) {
     )
 }
 
-export function CardClient() {
+export function CardClient({ link }) {
     return (
-        <Link href="/home/clients">
+        <Link href={link}>
             <div>
                 <CardLinkBase>
                     <div className="bg-green-500 rounded-lg block p-1 w-10">
