@@ -9,10 +9,10 @@ export function Home() {
                         <h1 className="bg-clip-text to-violet-500 text-4xl font-extrabold text-center sm:text-6xl max-w-2xl m-auto">
                         Estamos construindo a Ease Service
                         </h1>
-                        <p className="mt-10 sm:mt-20 text-xl text-center sm:text-2xl max-w-xl m-auto">
+                        {/* <p className="mt-10 sm:mt-20 text-xl text-center sm:text-2xl max-w-xl m-auto">
                         Você pode melhorar a organização do seu trabalho de uma maneira simples e fácil,
                         agendando sessões com seus clientes e estúdios.
-                        </p>
+                        </p> */}
                         <Link href='/signup'>
                             <button type="submit" className='mt-10 max-w-xs m-auto bg-black text-white text-xl font-semibold rounded-lg focus:ring-black block w-full p-2.5 button-movement'>
                             Participar
