@@ -13,8 +13,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<AuthProvider>
-			<ReactNotifications />
-			<Navbar />
+			<ReactNotifications/>
+			<Navbar/>
 			<AuthStateChanged>
 				<Component {...pageProps} />
 			</AuthStateChanged>

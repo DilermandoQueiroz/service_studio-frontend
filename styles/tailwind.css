@@ -3,16 +3,45 @@
 @tailwind utilities;
 
 html {
-    background-color: rgb(250, 250, 250);
+    background-color: #efefee;
+}
+
+@layer base {
+    html {
+        @apply text-black
+    }
 }
 
 @layer components {
+    .card {
+        @apply bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4
+    }
+    .button-show-password {
+        @apply bg-black rounded px-2 py-1 text-sm text-white cursor-pointer
+    }
+
+    .link {
+        @apply text-center text-ease-purple w-full pt-6
+    }
+
     .input {
-        @apply border-2 border-black rounded-lg block w-full p-2.5 focus:outline-none focus:border-blue-500;
+        @apply bg-transparent border-2 border-black rounded-lg block w-full p-2.5 focus:outline-none focus:border-ease-purple;
+    }
+
+    .form {
+        @apply bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4
+    }
+
+    .card-title {
+        @apply text-left text-4xl font-bold pb-6
     }
 
     .formbutton {
         @apply button
+    }
+
+    .formbutton-send {
+        @apply place-content-center block w-full py-2.5 mr-2 bg-ease rounded-lg border border-ease inline-flex items-center
     }
 
     .button {

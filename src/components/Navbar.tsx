@@ -2,15 +2,16 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 import useAuth from '../hook/auth';
-import nookies from 'nookies'
+import { ServiceProvider } from '../service/ServiceProvider';
 
 const Navbar = () => {
-  const [active, setActive] = useState(false);
-  const [activeTwo, setActiveTwo] = useState(false);
-  const [sellMenu, setSellMenu] = useState(false);
-  const [registerMenu, setRegisterMenu] = useState(false);
+  const [active, setActive] = useState(false)
+  const [activeTwo, setActiveTwo] = useState(false)
+  const [sellMenu, setSellMenu] = useState(false)
+  const [removeMenu, setRemoveMenu] = useState(false)
+  const [registerMenu, setRegisterMenu] = useState(false)
 
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth()
   const router = useRouter()
 
   const handleClick = () => {
@@ -20,28 +21,22 @@ const Navbar = () => {
   };
 
   const registerHandleClick = () => {
-    setRegisterMenu(!registerMenu);
+    setRegisterMenu(!registerMenu)
 
   };
 
   const sellHandleClick = () => {
-    setSellMenu(!sellMenu);
+    setSellMenu(!sellMenu)
+  };
+
+  const removeHandleClick = () => {
+    setRemoveMenu(!removeMenu)
   };
 
   const deleteAccount = async () => {
     handleClick()
-    const options = {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
-        "Access-Control-Allow-Origin": "*"
-      }
-    }
-    const endpoint = process.env.NEXT_PUBLIC_API_ROUTE + 'provider/remove'
-    const response = await fetch(endpoint, options)
-    const data = await response.json();
-    console.log(data)
+    const response = await ServiceProvider.removeServiceProvider()
+    console.log(response)
   }
 
   const register = () => {
@@ -142,15 +137,36 @@ const Navbar = () => {
     )
   }
 
+  const remove = () => {
+
+    return (
+      <>
+        {
+          user &&
+          <div>
+            <div onClick={removeHandleClick} className='cursor-pointer button-movement w-full px-3 py-2 rounded font-bold items-center justify-center'>
+              Excluir {!removeMenu ? ">" : "∨"}
+            </div>
+            <div className={`${removeMenu ? '' : 'hidden'}`}>
+              <div>
+                  <a onClick={deleteAccount} className='cursor-pointer button-movement ml-2.5 w-full px-3 py-2 rounded font-bold items-center justify-center'>
+                    ** Conta
+                  </a>
+              </div>
+            </div>
+          </div>
+        }
+
+      </>
+    )
+  }
 
   return (
     <>
-      <nav className='max-w-6xl m-auto flex items-center flex-wrap p-4 '>
-        <Link href='/'>
-          <a className='inline-flex items-center mr-4 '>
-            <span className='text-xl text-black font-bold uppercase tracking-wide'>
-              EASE SERVICE
-            </span>
+      <nav className='max-w-6xl m-auto flex items-center flex-wrap p-4 bg-transparent'>
+        <Link href = '/'>
+          <a className = 'inline-flex items-center mr-4'>
+            <img src='/ease-comprido.svg' alt='next' width="120" height="120"/>
           </a>
         </Link>
         {
@@ -184,14 +200,15 @@ const Navbar = () => {
           </svg>
         </button>
         {/*Note that in this div we will use a ternary operator to decide whether or not to display the content of the div  */}
-        <div
-          className={`${active ? '' : 'hidden'
-            }   w-full `}
-        >
-          <div className='items-start  flex flex-col'>
+          <div
+            className={`${active ? '' : 'hidden'
+              }   w-full `}
+          >
+          <div className='items-start flex flex-col'>
             {user && privado()}
             {register()}
             {sell()}
+            {remove()}
           </div>
         </div>
       </nav>

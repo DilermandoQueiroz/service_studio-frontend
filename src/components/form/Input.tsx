@@ -176,7 +176,7 @@ export function InputPassword({ register, errors }) {
             <div className="relative w-full">
                 <div className="absolute inset-y-0 right-0 flex items-center px-2">
                     <input onClick={() => setPasswordHidden(!passwordHidden)} className="hidden js-password-toggle" id="toggle" type="checkbox" />
-                    <label className="bg-black rounded px-2 py-1 text-sm text-white cursor-pointer js-password-label" htmlFor="toggle">{passwordHidden ? 'mostrar' : 'esconder'}</label>
+                    <label className="button-show-password js-password-label" htmlFor="toggle">{passwordHidden ? 'mostrar' : 'esconder'}</label>
                 </div>
                 <input {...register("password",
                     {

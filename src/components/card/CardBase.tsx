@@ -3,7 +3,7 @@ import Link from "next/link"
 export function CardBase({ children }) {
     return (
         <div className='m-4 flex justify-center items-center'>
-            <div className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4'>
+            <div className='card'>
                 {children}
             </div>             
         </div>
@@ -13,7 +13,7 @@ export function CardBase({ children }) {
 export function CardBaseSmall({ children }) {
     return (
         <div className='flex justify-center items-center'>
-            <div className='bg-white container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4'>
+            <div className='bg-black container lg:mx-auto max-w-sm border-black border-2 rounded-lg shadow-md px-4 pt-6 pb-8 mb-4'>
                 {children}
             </div>             
         </div>

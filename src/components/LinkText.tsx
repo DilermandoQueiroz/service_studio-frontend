@@ -1,7 +1,7 @@
 export function LinkText({ text, handleOnChange }) {
     return (
         <button
-            className='text-center text-sky-500 w-full pt-6'
+            className='link'
             onClick={handleOnChange}
         >
             {text}

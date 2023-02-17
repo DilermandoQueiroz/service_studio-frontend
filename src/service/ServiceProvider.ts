@@ -1,6 +1,7 @@
 import { Store } from 'react-notifications-component';
 import { AuthService} from './AuthService'
-import { ServiceProviderCreateFirebase } from '../types/ServiceProvider';
+import { ServiceProviderCreateFirebase } from '../types/ServiceProvider'
+import nookies from 'nookies'
 
 export const ServiceProvider = {
 
@@ -97,5 +98,27 @@ export const ServiceProvider = {
 
     resetPasswordWithEmail: async (email) => {
         AuthService.resetPassword(email)
+    },
+
+    removeServiceProvider: async () => {
+        try {
+            const response = await fetch('/api/provider/remove', {
+                method: 'get',
+                headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${nookies.get(null, "__session")["__session"]}`,
+                "Access-Control-Allow-Origin": "*"
+                }
+            })
+            
+            if (response.ok) {
+                return true
+            }
+            
+            return false
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 };
